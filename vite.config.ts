@@ -9,7 +9,8 @@ export default defineConfig({
     alias: {
       '@': resolve('./src'),
       'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
-    }
+    },
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   server: {
     open: true,

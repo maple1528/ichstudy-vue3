@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw, RouterView } from 'vue-router'
 import AppLayout from '@/layouts/AppLayout.vue'
+import { useUserStore } from '@/store/user'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/views/home/index.vue')
+    component: () => import('@/views/home/home.vue')
   },
   {
     path: '/',
@@ -31,6 +32,23 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/course/course.vue')
       },
       {
+        path: '/course/:id',
+        name: 'courseInfo',
+        component: () => import('@/views/course/info.vue'),
+        props: true
+      },
+      // {
+      //   path: '/course',
+      //   components: RouterView,
+      //   children: [
+      //     {
+      //       path: '',
+      //       name: 'course',
+      //       component: () => import('@/views/course/course.vue')
+      //     }
+      //   ]
+      // },
+      {
         path: '/vr',
         name: 'vr',
         component: () => import('@/views/vr/vr.vue')
@@ -40,6 +58,30 @@ const routes: Array<RouteRecordRaw> = [
         name: 'about',
         component: () => import('@/views/about/about.vue')
       },
+      {
+        path: '/my',
+        component: () => import('@/views/my/my.vue'),
+        children: [
+          {
+            path: '',
+            name: 'myHome',
+            component: () => import('@/views/my/components/myHome.vue')
+          },
+          {
+            path: 'history',
+            name: 'History',
+            component: () => import('@/views/my/components/history.vue')
+          }
+          // {
+          //   path: 'setting',
+          //   name: 'Setting',
+          //   component: Setting,
+          //   meta: {
+          //     keepAlive: true
+          //   }
+          // }
+        ]
+      }
     ]
   },
   {
@@ -51,6 +93,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to, from) => {
+  if (localStorage.getItem('token')) {
+    const userStore = useUserStore()
+    userStore.getInfo()
+  }
 })
 
 export default router
