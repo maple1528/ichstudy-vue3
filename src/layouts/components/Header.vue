@@ -9,8 +9,11 @@
     </div>
 
     <div class="header-right flex-between-center">
-      <div class="lang" @click="switchLang">
-        <img src="@/assets/lang.svg" alt="languages">
+      <div icon-btn @click="switchLang">
+        <div i-carbon-ibm-watson-language-translator />
+      </div>
+      <div icon-btn @click="toggleDark()" >
+        <div font-8 i="carbon-sun dark:carbon-moon" />
       </div>
       <div class="user-box flex-between-center" v-if="userStore.token">
         <div class="avatar" @click="routerPush('/my')">
@@ -38,6 +41,8 @@ import { useUserStore } from '@/store/user'
 import { routerPush } from '@/utils/common'
 import useLocale from '@/hook/useLocale'
 import { onMounted, ref } from 'vue';
+
+import { toggleDark } from '@/composables/dark'
 
 const userStore = useUserStore()
 
