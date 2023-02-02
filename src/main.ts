@@ -4,6 +4,7 @@ import router from './router'
 import { createPinia } from 'pinia'
 import i18n from './locale'
 
+import '@unocss/reset/tailwind.css'
 import './styles/index.less'
 import 'uno.css'
 
