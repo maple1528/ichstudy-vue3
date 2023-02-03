@@ -21,12 +21,14 @@
     "vue3-video-play": "^1.3.1-beta.6"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.35.1",
     "@iconify-json/carbon": "^1.1.14",
     "@intlify/unplugin-vue-i18n": "^0.8.1",
     "@types/node": "^18.7.6",
     "@types/validator": "^13.7.6",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue-macros/volar": "^0.8.0",
+    "eslint": "^8.33.0",
     "less": "^4.1.3",
     "typescript": "^4.6.4",
     "unocss": "^0.49.1",
