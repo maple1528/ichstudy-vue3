@@ -11,15 +11,15 @@ import {
 
 export default defineConfig({
   exclude: [
-    ".vscode",
-    "node_modules",
-    "public",
-    "dist",
-    "build",
+    '.vscode',
+    'node_modules',
+    'public',
+    'dist',
+    'build',
   ],
   rules: [
   ],
-  shortcuts:[
+  shortcuts: [
     {
       'f-c-c': 'flex items-center justify-center',
       'f-c-b': 'flex items-center justify-between',
@@ -29,8 +29,8 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      main: '#aaaaa'
-    }
+      main: '#aaaaa',
+    },
   },
   presets: [
     presetUno(),

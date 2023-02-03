@@ -1,26 +1,3 @@
-<template>
-  <div class="cover-box" v-if="type">
-    <div class="cover">
-      <div class="left">
-        <img src="@/assets/logo.png" alt="logo">
-      </div>
-      <div class="right">
-        <el-tabs :model-value="type" tab-position="top" stretch>
-          <el-tab-pane :label="$t('navList.login')" :name="1">
-            <login-from @close="toClose"></login-from>
-          </el-tab-pane>
-          <el-tab-pane :label="$t('navList.reg')" :name="2">
-            <reg-from></reg-from>
-          </el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="close" @click="$emit('close')">
-        <img src="@/assets/close.svg" alt="close" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang='ts'>
 import LoginFrom from './LoginFrom.vue'
 import RegFrom from './RegFrom.vue'
@@ -31,9 +8,30 @@ const emit = defineEmits(['close'])
 const toClose = () => {
   emit('close')
 }
-
-
 </script>
+
+<template>
+  <div v-if="type" class="cover-box">
+    <div class="cover">
+      <div class="left">
+        <img src="@/assets/logo.png" alt="logo">
+      </div>
+      <div class="right">
+        <el-tabs :model-value="type" tab-position="top" stretch>
+          <el-tab-pane :label="$t('navList.login')" :name="1">
+            <LoginFrom @close="toClose" />
+          </el-tab-pane>
+          <el-tab-pane :label="$t('navList.reg')" :name="2">
+            <RegFrom />
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+      <div class="close" @click="$emit('close')">
+        <img src="@/assets/close.svg" alt="close">
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang='less'>
 .cover-box {
@@ -69,8 +67,7 @@ const toClose = () => {
     }
   }
 
-
-} 
+}
 .left {
   width: 40%;
   display: flex;

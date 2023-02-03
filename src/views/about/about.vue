@@ -1,9 +1,11 @@
-<template>
-  <div class="content flex-column-center">About</div>
-</template>
-
 <script setup lang='ts'>
 </script>
+
+<template>
+  <div class="content flex-column-center">
+    About
+  </div>
+</template>
 
 <style scoped lang='less'>
 .content {

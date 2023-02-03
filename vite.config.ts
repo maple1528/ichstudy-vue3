@@ -1,6 +1,6 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import UnoCSS from 'unocss/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
@@ -9,8 +9,8 @@ export default defineConfig({
   plugins: [
     VueMacros({
       plugins: {
-        vue: vue()
-      }
+        vue: vue(),
+      },
     }),
     VueI18nPlugin({
       runtimeOnly: true,
@@ -23,9 +23,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
     },
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   server: {
     open: true,
@@ -35,6 +35,6 @@ export default defineConfig({
       //   changeOrigin: true,
       //   rewrite: (path) => path.replace(/^\/api/, '/api/v1/')
       // }
-    }
-  }
+    },
+  },
 })

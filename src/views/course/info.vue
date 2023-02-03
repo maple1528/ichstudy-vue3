@@ -1,45 +1,21 @@
-<template>
-  <div class="content flex-center-item">
-    <div class="left">
-      <h1 class="title">{{ title }}</h1>
-      <video
-        controls
-        :src="currentUrl">
-        <source :src="currentUrl" type="video/mp4">
-        <!-- <track :src="currentSubUrl" kind="subtitles" default> -->
-      </video>
-      <p class="info">{{ info }}</p>
-    </div>
-    <div class="right">
-      <ul>
-        <li
-          v-for="(item, i) in sectionTitleList.list"
-          :class="{'active': currentIndex === i}"
-          @click="changeVideo(i)"
-        >{{ currentLocale === 'zh-CN' ? item.cnname : item.enname }}</li>
-      </ul>
-    </div>
-  </div>
-</template>
-
 <script setup lang='ts'>
-import { getSectionV, getCourseV } from '@/api/visitor'
-import { getFileUrl } from '@/utils/common';
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { getCourseV, getSectionV } from '@/api/visitor'
+import { getFileUrl } from '@/utils/common'
 import useLocale from '@/hook/useLocale'
-import { useRoute } from 'vue-router';
 
 // import "vue3-video-play/dist/style.css";
 // import { videoPlay } from "vue-video-play";
 
 interface IInfo {
-  cindex: string,
-  cnname: string,
-  enname: string,
-  sindex: string,
-  status: number,
-  subtitlespath: string,
-  videopath: string,
+  cindex: string
+  cnname: string
+  enname: string
+  sindex: string
+  status: number
+  subtitlespath: string
+  videopath: string
   vidfortx: string
 }
 
@@ -48,7 +24,7 @@ const route = useRoute()
 const cid = route.params.id as string
 // const sectionList = reactive({list: [] as IInfo[]})
 const sectionList = ref([])
-const sectionTitleList = reactive({list: [] as IInfo[]})
+const sectionTitleList = reactive({ list: [] as IInfo[] })
 const currentIndex = ref(0)
 const currentUrl = ref('')
 const cnTitle = ref('')
@@ -57,25 +33,18 @@ const cnInfo = ref('')
 const enInfo = ref('')
 
 const title = computed(() => {
-  if (currentLocale.value === 'zh-CN') {
+  if (currentLocale.value === 'zh-CN')
     return cnTitle.value
-  } else {
+  else
     return enTitle.value
-  }
 })
 
 const info = computed(() => {
-  if (currentLocale.value === 'zh-CN') {
+  if (currentLocale.value === 'zh-CN')
     return cnInfo.value
-  } else {
+  else
     return enInfo.value
-  }
 })
-
-const currentSubUrl = computed(() => {
-
-})
-
 
 const getSectionList = async () => {
   try {
@@ -84,13 +53,12 @@ const getSectionList = async () => {
     const info = sectionList.value[currentIndex.value] as IInfo
     currentUrl.value = getFileUrl('video', info.videopath)
 
-    sectionList.value.forEach(item => {
+    sectionList.value.forEach((item) => {
       const i = item as IInfo
       sectionTitleList.list.push(i)
     })
-    console.log(sectionTitleList)
-  } catch (err) {
-    console.log(err)
+  }
+  catch (err) {
   }
 }
 
@@ -108,8 +76,9 @@ const getCourseInfo = async () => {
         return
       }
     }
-  } catch (err) {
-    
+  }
+  catch (err) {
+
   }
 }
 
@@ -123,8 +92,39 @@ onMounted(() => {
   // getSectionList()
   getCourseInfo()
 })
-
 </script>
+
+<template>
+  <div class="content flex-center-item">
+    <div class="left">
+      <h1 class="title">
+        {{ title }}
+      </h1>
+      <video
+        controls
+        :src="currentUrl"
+      >
+        <source :src="currentUrl" type="video/mp4">
+        <!-- <track :src="currentSubUrl" kind="subtitles" default> -->
+      </video>
+      <p class="info">
+        {{ info }}
+      </p>
+    </div>
+    <div class="right">
+      <ul>
+        <li
+          v-for="(item, i) in sectionTitleList.list"
+          :key="i"
+          :class="{ active: currentIndex === i }"
+          @click="changeVideo(i)"
+        >
+          {{ currentLocale === 'zh-CN' ? item.cnname : item.enname }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
 
 <style scoped lang='less'>
 .content {

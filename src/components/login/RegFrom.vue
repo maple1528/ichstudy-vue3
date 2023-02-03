@@ -1,53 +1,9 @@
-<template>
-  <div>
-    <el-form
-      :model="user"
-      ref="regFormRef"
-      :rules="regRules"
-      v-show="!ifNext"
-    >
-      <el-form-item prop="username">
-        <el-input v-model="user.username" :placeholder="$t('loginFrom.username')"></el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input v-model="user.password" :placeholder="$t('loginFrom.password')" type="password"></el-input>
-      </el-form-item>
-      <el-form-item prop="checkPwd">
-        <el-input v-model="user.checkPwd" :placeholder="$t('loginFrom.checkPwd')" type="password"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="handleRegister">{{ $t('loginFrom.next') }}</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-form
-      :model="ver"
-      ref="verFormRef"
-      :rules="verRules"
-      v-show="ifNext"
-    >
-      <el-form-item prop="account">
-        <el-input v-model="ver.account" :placeholder="$t('loginFrom.emailPhone')"></el-input>
-      </el-form-item>
-      <el-form-item prop="ver">
-        <div class="ver-box">
-          <el-input v-model="ver.code" :placeholder="$t('loginFrom.code')"></el-input>
-          <el-button type="primary" @click="sendVer" :disabled="ifSend">{{ $t('loginFrom.sendCode') }} (60)</el-button>
-        </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="handleBind">{{ $t('loginFrom.bind') }}</el-button>
-      </el-form-item>
-    </el-form>
-  </div>
-</template>
-
 <script setup lang='ts'>
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import validator from 'validator'
-import { register, mailBind, mailVerify, smsBind, smsVerify } from '@/api/user'
+import { mailBind, register } from '@/api/user'
 
 const loading = ref(false)
 const ifNext = ref(false)
@@ -57,12 +13,12 @@ let accountType = 0 // 1: 邮箱  2: 手机号
 const user = reactive({
   username: '',
   password: '',
-  checkPwd: ''
+  checkPwd: '',
 })
 
 const ver = reactive({
   account: '',
-  code: ''
+  code: '',
 })
 
 const regFormRef = ref<FormInstance>()
@@ -70,25 +26,23 @@ const verFormRef = ref<FormInstance>()
 
 const validateName = (rule: any, value: any, callback: any) => {
   const reg = /^[0-9a-zA-Z]*$/
-  if (value === '') {
+  if (value === '')
     callback(new Error('Please input the username'))
-  } else if (value.length < 6 || value.length > 20) {
-    callback(new Error("The length must between 6-20"))
-  } else if (!reg.test(value)) {
-    callback(new Error("The username must be letter or number"))
-  } else {
+  else if (value.length < 6 || value.length > 20)
+    callback(new Error('The length must between 6-20'))
+  else if (!reg.test(value))
+    callback(new Error('The username must be letter or number'))
+  else
     callback()
-  }
 }
 
 const validatePass = (rule: any, value: any, callback: any) => {
-  if (value === '') {
+  if (value === '')
     callback(new Error('Please input the password again'))
-  } else if (value !== user.password) {
-    callback(new Error("Two inputs don't match!"))
-  } else {
+  else if (value !== user.password)
+    callback(new Error('Two inputs don\'t match!'))
+  else
     callback()
-  }
 }
 
 const validateAccount = (rule: any, value: any, callback: any) => {
@@ -96,26 +50,29 @@ const validateAccount = (rule: any, value: any, callback: any) => {
   accountType = 0
   if (value === '') {
     callback(new Error('Please input the Email or phone number'))
-  } else if (validator.isEmail(value)) {
+  }
+  else if (validator.isEmail(value)) {
     accountType = 1
     callback()
-  } else if (reg.test(value)) {
+  }
+  else if (reg.test(value)) {
     accountType = 2
     callback()
-  } else {
-    callback(new Error("Please input the correct Email or phone number"))
+  }
+  else {
+    callback(new Error('Please input the correct Email or phone number'))
   }
 }
 
 const regRules = reactive<FormRules>({
   username: [{ validator: validateName, trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-  checkPwd: [{ validator: validatePass, trigger: 'blur' }]
+  checkPwd: [{ validator: validatePass, trigger: 'blur' }],
 })
 
 const verRules = reactive<FormRules>({
   account: [{ validator: validateAccount, trigger: 'blur' }],
-  ver: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
+  ver: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
 })
 
 const handleRegister = () => {
@@ -126,7 +83,8 @@ const handleRegister = () => {
       if (data.endata.su === 1) {
         ElMessage.success(data.endata.msg)
         ifNext.value = true
-      } else {
+      }
+      else {
         ElMessage.warning(data.endata.msg)
       }
     }
@@ -141,15 +99,11 @@ const sendVer = async () => {
   if (accountType === 1) {
     const param = { email: ver.account, username: user.username }
     const { data } = await mailBind(param)
-    console.log(data)
-  } else if (accountType === 2) {
+  }
+  else if (accountType === 2) {
     const { data } = await register(user)
-    if (data.endata.su === 0) {
+    if (data.endata.su === 0)
       ElMessage.warning('手机号已被注册')
-    } else {
-      
-    }
-    console.log(data)
   }
 }
 
@@ -157,16 +111,65 @@ const handleBind = () => {
   regFormRef.value?.validate(async (valid) => {
     if (valid) {
       if (accountType === 1) {
-        
-      } else if (accountType === 2) {
-        
+        //
+      }
+      else if (accountType === 2) {
+        //
       }
     }
   })
 }
-
-
 </script>
+
+<template>
+  <div>
+    <el-form
+      v-show="!ifNext"
+      ref="regFormRef"
+      :model="user"
+      :rules="regRules"
+    >
+      <el-form-item prop="username">
+        <el-input v-model="user.username" :placeholder="$t('loginFrom.username')" />
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input v-model="user.password" :placeholder="$t('loginFrom.password')" type="password" />
+      </el-form-item>
+      <el-form-item prop="checkPwd">
+        <el-input v-model="user.checkPwd" :placeholder="$t('loginFrom.checkPwd')" type="password" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="handleRegister">
+          {{ $t('loginFrom.next') }}
+        </el-button>
+      </el-form-item>
+    </el-form>
+
+    <el-form
+      v-show="ifNext"
+      ref="verFormRef"
+      :model="ver"
+      :rules="verRules"
+    >
+      <el-form-item prop="account">
+        <el-input v-model="ver.account" :placeholder="$t('loginFrom.emailPhone')" />
+      </el-form-item>
+      <el-form-item prop="ver">
+        <div class="ver-box">
+          <el-input v-model="ver.code" :placeholder="$t('loginFrom.code')" />
+          <el-button type="primary" :disabled="ifSend" @click="sendVer">
+            {{ $t('loginFrom.sendCode') }} (60)
+          </el-button>
+        </div>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="handleBind">
+          {{ $t('loginFrom.bind') }}
+        </el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
 
 <style lang='less'>
 .ver-box {

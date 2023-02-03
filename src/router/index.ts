@@ -1,21 +1,22 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw, RouterView } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import AppLayout from '@/layouts/AppLayout.vue'
 import { useUserStore } from '@/store/user'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: { name: 'home' }
+    redirect: { name: 'home' },
   },
   {
     path: '/404',
     name: '404',
-    component: () => import('@/views/404.vue')
+    component: () => import('@/views/404.vue'),
   },
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/views/home/home.vue')
+    component: () => import('@/views/home/home.vue'),
   },
   {
     path: '/',
@@ -24,18 +25,18 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/home/home.vue')
+        component: () => import('@/views/home/home.vue'),
       },
       {
         path: '/course',
         name: 'course',
-        component: () => import('@/views/course/course.vue')
+        component: () => import('@/views/course/course.vue'),
       },
       {
         path: '/course/:id',
         name: 'courseInfo',
         component: () => import('@/views/course/info.vue'),
-        props: true
+        props: true,
       },
       // {
       //   path: '/course',
@@ -51,12 +52,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/vr',
         name: 'vr',
-        component: () => import('@/views/vr/vr.vue')
+        component: () => import('@/views/vr/vr.vue'),
       },
       {
         path: '/about',
         name: 'about',
-        component: () => import('@/views/about/about.vue')
+        component: () => import('@/views/about/about.vue'),
       },
       {
         path: '/my',
@@ -65,13 +66,13 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: '',
             name: 'myHome',
-            component: () => import('@/views/my/components/myHome.vue')
+            component: () => import('@/views/my/components/myHome.vue'),
           },
           {
             path: 'history',
             name: 'History',
-            component: () => import('@/views/my/components/history.vue')
-          }
+            component: () => import('@/views/my/components/history.vue'),
+          },
           // {
           //   path: 'setting',
           //   name: 'Setting',
@@ -80,19 +81,19 @@ const routes: Array<RouteRecordRaw> = [
           //     keepAlive: true
           //   }
           // }
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: { name: 'home' }
-  }
+    redirect: { name: 'home' },
+  },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 router.beforeEach((to, from) => {

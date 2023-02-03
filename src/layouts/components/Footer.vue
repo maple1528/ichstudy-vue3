@@ -1,3 +1,6 @@
+<script setup lang='ts'>
+</script>
+
 <template>
   <div class="footer flex-center-item">
     <div class="left">
@@ -11,9 +14,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang='ts'>
-</script>
 
 <style scoped lang='less'>
 .footer {

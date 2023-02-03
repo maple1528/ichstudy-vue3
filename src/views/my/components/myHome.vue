@@ -1,43 +1,15 @@
-<template>
-  <div class="my-home flex-column-center">
-    <h1 class="left-title">{{ $t('myHomeText.title') }}</h1>
-    <div class="top-box flex-between-center">
-      <div class="c-box">
-        <h3 class="title">{{ $t('myHomeText.point') }}</h3>
-        <div class="num">{{ point }}</div>
-      </div>
-      <div class="c-box">
-        <h3 class="title">{{ $t('myHomeText.totalTime') }}</h3>
-        <div class="num">{{ totalTimeText }}</div>
-      </div>
-      <div class="c-box">
-        <h3 class="title">{{ $t('myHomeText.totalNum') }}</h3>
-        <div class="num">{{ totalNum }}</div>
-      </div>
-    </div>
-    <div class="separate"></div>
-    <div class="bot-box">
-      <h3 class="left-title">{{ $t('myHomeText.mostVideo') }}</h3>
-      <div class="v-list flex-between-center">
-        <div class="v-title">{{ mTitle }}</div>
-        <div class="v-num">{{ mNum }}</div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang='ts'>
+import { computed, onMounted, ref } from 'vue'
 import { getUserPlayData } from '@/api/user'
-import { computed, onMounted, reactive, ref } from 'vue'
 import { useUserStore } from '@/store/user'
 
 const userStore = useUserStore()
 interface IData {
-  cscn: string,
-  csen: string,
-  ctime: string,
-  playcounts: number,
-  sccn: string,
+  cscn: string
+  csen: string
+  ctime: string
+  playcounts: number
+  sccn: string
   scen: string
 }
 
@@ -54,25 +26,23 @@ const point = computed(() => {
 const totalTimeText = computed(() => {
   const hour = Math.floor(totalTime.value / 60)
   const min = Math.floor(totalTime.value - hour * 60)
-  if (localStorage.getItem('locale') === 'zh-CN') {
+  if (localStorage.getItem('locale') === 'zh-CN')
     return `${hour} 时 ${min} 分`
-  } else {
+  else
     return `${hour} H ${min} M`
-  }
 })
 const mTitle = computed(() => {
-  if (localStorage.getItem('locale') === 'zh-CN') {
+  if (localStorage.getItem('locale') === 'zh-CN')
     return mCnTitle
-  } else {
+  else
     return mEnTitle
-  }
 })
 
 onMounted(() => {
   getUserPlayData(userStore.username)
-    .then(res => {
+    .then((res) => {
       const playData: IData[] = res.data.endata.data
-      playData.forEach(item => {
+      playData.forEach((item) => {
         totalNum.value += item.playcounts
         totalTime.value += parseInt(item.ctime)
         if (item.playcounts > mNum.value) {
@@ -82,9 +52,56 @@ onMounted(() => {
         }
       })
     })
-    .catch(err => console.log(err))
 })
 </script>
+
+<template>
+  <div class="my-home flex-column-center">
+    <h1 class="left-title">
+      {{ $t('myHomeText.title') }}
+    </h1>
+    <div class="top-box flex-between-center">
+      <div class="c-box">
+        <h3 class="title">
+          {{ $t('myHomeText.point') }}
+        </h3>
+        <div class="num">
+          {{ point }}
+        </div>
+      </div>
+      <div class="c-box">
+        <h3 class="title">
+          {{ $t('myHomeText.totalTime') }}
+        </h3>
+        <div class="num">
+          {{ totalTimeText }}
+        </div>
+      </div>
+      <div class="c-box">
+        <h3 class="title">
+          {{ $t('myHomeText.totalNum') }}
+        </h3>
+        <div class="num">
+          {{ totalNum }}
+        </div>
+      </div>
+    </div>
+    <div class="separate" />
+    <div class="bot-box">
+      <h3 class="left-title">
+        {{ $t('myHomeText.mostVideo') }}
+      </h3>
+      <div class="v-list flex-between-center">
+        <div class="v-title">
+          {{ mTitle }}
+        </div>
+        <div class="v-num">
+          {{ mNum }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang='less'>
 .my-home {
@@ -119,10 +136,8 @@ h1 {
   width: 80%;
   // background-color: #fff;
 
-  
 }
 .left-title {
   text-align: left;
 }
-
 </style>

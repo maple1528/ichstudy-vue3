@@ -1,35 +1,25 @@
-<template>
-  <div class="img-box" @click="toVideo">
-    <img :src="imgUrl" alt="img">
-    <div class="cover">
-      <div class="title">{{ title }}</div>
-      <div class="more">{{ $t('context.watch') }}</div>
-    </div>
-  </div>
-</template>
-
 <script setup lang='ts'>
-import { getFileUrl, routerPush } from '@/utils/common'
-import { ElMessage } from 'element-plus';
-import { computed, onMounted, ref } from 'vue';
+import { ElMessage } from 'element-plus'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { getFileUrl, routerPush } from '@/utils/common'
+const props = defineProps<{ info: IInfo }>()
+
 const { t } = useI18n()
 
 const tip = computed(() => {
   return t('errorTips.watchCourse')
 })
 interface IInfo {
-  cindex: string,
-  cninfo: string,
-  cnname: string,
-  eninfo: string,
-  enname: string,
-  imgpath: string,
-  playcounts: number,
+  cindex: string
+  cninfo: string
+  cnname: string
+  eninfo: string
+  enname: string
+  imgpath: string
+  playcounts: number
   status: number
 }
-
-const props = defineProps<{ info: IInfo }>()
 
 const imgUrl = getFileUrl('img', props.info.imgpath)
 const routerUrl = `/course/${props.info.cindex}`
@@ -37,26 +27,40 @@ const routerUrl = `/course/${props.info.cindex}`
 const title = ref()
 
 onMounted(() => {
-  if (localStorage.getItem('locale') === 'zh-CN') {
+  if (localStorage.getItem('locale') === 'zh-CN')
     title.value = props.info.cnname
-  } else {
+  else
     title.value = props.info.enname
-  }
 })
 
 const toVideo = () => {
   const time = Number(localStorage.getItem('courseNum') || 0)
   if (localStorage.getItem('token')) {
     routerPush(routerUrl)
-  } else if (time < 5) {
+  }
+  else if (time < 5) {
     localStorage.setItem('courseNum', String(time + 1))
     routerPush(routerUrl)
-  } else {
+  }
+  else {
     ElMessage.error(tip.value)
   }
 }
-
 </script>
+
+<template>
+  <div class="img-box" @click="toVideo">
+    <img :src="imgUrl" alt="img">
+    <div class="cover">
+      <div class="title">
+        {{ title }}
+      </div>
+      <div class="more">
+        {{ $t('context.watch') }}
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang='less'>
 .img-box {

@@ -6,8 +6,8 @@ export const getCourseV = () => {
     url: '/course/visitor/getcourse/',
     method: 'POST',
     data: {
-      endata: {}
-    }
+      endata: {},
+    },
   })
 }
 
@@ -18,9 +18,9 @@ export const getSectionV = (cindex: string) => {
     method: 'POST',
     data: {
       endata: {
-        cindex
-      }
-    }
+        cindex,
+      },
+    },
   })
 }
 
@@ -30,7 +30,7 @@ export const getVrV = () => {
     url: '/vr/visitor/',
     method: 'POST',
     data: {
-      endata: {}
-    }
+      endata: {},
+    },
   })
 }

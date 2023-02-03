@@ -1,3 +1,8 @@
+<script setup lang='ts'>
+import useLocale from '@/hook/useLocale'
+const { currentLocale } = useLocale()
+</script>
+
 <template>
   <div class="content flex-column-center">
     <h2>{{ $t('navList.vr') }}</h2>
@@ -17,14 +22,11 @@
         </div>
       </div>
     </div>
-    <button class="more">{{ $t('context.more') }}</button>
+    <button class="more">
+      {{ $t('context.more') }}
+    </button>
   </div>
 </template>
-
-<script setup lang='ts'>
-import useLocale from '@/hook/useLocale'
-const { currentLocale } = useLocale()
-</script>
 
 <style scoped lang='less'>
 .content {

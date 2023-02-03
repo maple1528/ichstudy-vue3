@@ -1,28 +1,13 @@
-<template>
-  <div class="content">
-    <h1>{{ $t('navList.vr') }}</h1>
-    <div class="vr-item" v-for="(item, index) in vrList.list" :key="index">
-      <img :src="item.cover">
-      <div class="right">
-        <h2>{{ currentLocale === 'zh-CN' ? item.vrcnname : item.vrenname }}</h2>
-        <p>{{ currentLocale === 'zh-CN' ? item.vrcninfo : item.vreninfo }}</p>
-        <button class="btn" @click="openVR(item.vrpath)">{{ $t('vr.browser') }}</button>
-      </div>
-    </div>
-  </div>
-  <Footer></Footer>
-</template>
-
 <script setup lang='ts'>
+import { computed, onMounted, reactive } from 'vue'
+import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 import Footer from '@/layouts/components/Footer.vue'
 import { getFileUrl } from '@/utils/common'
 import { getVrV } from '@/api/visitor'
-import { computed, onMounted, reactive } from 'vue';
 import useLocale from '@/hook/useLocale'
-import { ElMessage } from 'element-plus';
-import { useI18n } from 'vue-i18n'
 
-let vrList = reactive({list: [] as IInfo[]})
+const vrList = reactive({ list: [] as IInfo[] })
 const { t } = useI18n()
 
 const { currentLocale } = useLocale()
@@ -31,18 +16,18 @@ const tip = computed(() => {
 })
 
 interface IInfo {
-  cover: string,
-  vr_panoramic_cover: string,
-  vrcninfo: string,
-  vrcnname: string,
-  vreninfo: string,
-  vrenname: string,
-  vrpath: string,
+  cover: string
+  vr_panoramic_cover: string
+  vrcninfo: string
+  vrcnname: string
+  vreninfo: string
+  vrenname: string
+  vrpath: string
   id: number
 }
 
 onMounted(() => {
-  getVrV().then(res => {
+  getVrV().then((res) => {
     vrList.list = res.data.endata.data.map((item: IInfo) => {
       item.cover = getFileUrl('img', item.cover)
       return item
@@ -54,15 +39,33 @@ const openVR = (url: string) => {
   const time = Number(localStorage.getItem('vrNum') || 0)
   if (localStorage.getItem('token')) {
     window.open(url, '_blank')
-  } else if (time < 5) {
+  }
+  else if (time < 5) {
     localStorage.setItem('vrNum', String(time + 1))
     window.open(url, '_blank')
-  } else {
+  }
+  else {
     ElMessage.error(tip.value)
   }
 }
-
 </script>
+
+<template>
+  <div class="content">
+    <h1>{{ $t('navList.vr') }}</h1>
+    <div v-for="(item, index) in vrList.list" :key="index" class="vr-item">
+      <img :src="item.cover">
+      <div class="right">
+        <h2>{{ currentLocale === 'zh-CN' ? item.vrcnname : item.vrenname }}</h2>
+        <p>{{ currentLocale === 'zh-CN' ? item.vrcninfo : item.vreninfo }}</p>
+        <button class="btn" @click="openVR(item.vrpath)">
+          {{ $t('vr.browser') }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</template>
 
 <style scoped lang='less'>
 .content {

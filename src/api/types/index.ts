@@ -1,26 +1,26 @@
 export interface IUser {
-  username: string,
+  username: string
   password: string
 }
 
 export interface IMailBind {
-  email: string,
+  email: string
   username: string
 }
 
 export interface IMailVerify {
-  email: string,
+  email: string
   username: string
   code: string
 }
 
 export interface ISMSBind {
-  phone: string,
+  phone: string
   username: string
 }
 
 export interface ISMSVerify {
-  phone: string,
+  phone: string
   username: string
   code: string
 }

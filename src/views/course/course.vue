@@ -1,35 +1,33 @@
+<script setup lang='ts'>
+import { onMounted, reactive } from 'vue'
+import CourseItem from './components/CourseItem.vue'
+import { getCourseV } from '@/api/visitor'
+import Footer from '@/layouts/components/Footer.vue'
+
+const courseList = reactive({ list: [] })
+
+onMounted(() => {
+  getCourseV().then((res) => {
+    courseList.list = res.data.endata.data
+  })
+})
+</script>
+
 <template>
   <div class="content flex-column-center">
     <h1>{{ $t('navList.course') }}</h1>
     <div class="list-box">
-      <div class="item-box" v-for="(item, i) in courseList.list">
-        <CourseItem :info="item"></CourseItem>
+      <div v-for="(item, i) in courseList.list" :key="i" class="item-box">
+        <CourseItem :info="item" />
       </div>
-      <i></i>
-      <i></i>
-      <i></i>
-      <i></i>
+      <i />
+      <i />
+      <i />
+      <i />
     </div>
   </div>
-  <Footer></Footer>
+  <Footer />
 </template>
-
-<script setup lang='ts'>
-import { onMounted, reactive } from 'vue'
-import { getCourseV } from '@/api/visitor'
-import CourseItem from './components/CourseItem.vue'
-import Footer from '@/layouts/components/Footer.vue';
-
-const courseList = reactive({list: []})
-
-onMounted(() => {
-  getCourseV().then(res => {
-    courseList.list = res.data.endata.data
-  })
-})
-
-
-</script>
 
 <style scoped lang='less'>
 .content {
@@ -58,7 +56,7 @@ onMounted(() => {
     }
 
     // .item-box:last-child {
-    //  margin-right: auto; 
+    //  margin-right: auto;
     // }
     i {
       width: 300px;

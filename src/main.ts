@@ -1,15 +1,14 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
-import { createPinia } from 'pinia'
 import i18n from './locale'
 
+import 'element-plus/dist/index.css'
 import '@unocss/reset/tailwind.css'
 import './styles/index.less'
 import 'uno.css'
-
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
 
 const pinia = createPinia()
 

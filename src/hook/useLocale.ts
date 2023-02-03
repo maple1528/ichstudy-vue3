@@ -1,5 +1,5 @@
-import { computed } from "vue"
-import { useI18n } from "vue-i18n"
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default function useLocale() {
   const i18n = useI18n()
@@ -13,10 +13,10 @@ export default function useLocale() {
     i18n.locale.value = value
     localStorage.setItem('locale', value)
   }
-  
+
   return {
     i18n,
     currentLocale,
-    changeLocale
+    changeLocale,
   }
 }

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { IUser, IMailBind, IMailVerify, ISMSBind, ISMSVerify } from '@/api/types'
+import type { IMailBind, IMailVerify, ISMSBind, ISMSVerify, IUser } from '@/api/types'
 
 // 登录
 export const login = (data: IUser) => {
@@ -7,34 +7,34 @@ export const login = (data: IUser) => {
     url: '/login/',
     method: 'POST',
     data: {
-      endata: data
-    }
+      endata: data,
+    },
   })
 }
 
 // 退出登录
-export function logout () {
+export function logout() {
   return request({
     url: '/user',
     method: 'POST',
     data: {
       endata: {
-        action: 'logout'
-      }
-    }
+        action: 'logout',
+      },
+    },
   })
 }
 
 // 获取用户信息
-export function getUserInfo () {
+export function getUserInfo() {
   return request({
     url: '/user',
     method: 'POST',
     data: {
       endata: {
-        action: 'getinfo'
-      }
-    }
+        action: 'getinfo',
+      },
+    },
   })
 }
 
@@ -44,62 +44,62 @@ export function getUserPlayData(username: string) {
     url: '/getplaydata/',
     method: 'POST',
     data: {
-      username
-    }
+      username,
+    },
   })
 }
 
 // 注册
-export function register (data: IUser) {
+export function register(data: IUser) {
   return request({
     url: '/register/',
     method: 'POST',
     data: {
-      endata: data
-    }
+      endata: data,
+    },
   })
 }
 
 // 绑定邮箱
-export function mailBind (data: IMailBind) {
+export function mailBind(data: IMailBind) {
   return request({
     url: '/mailband/',
     method: 'POST',
     data: {
-      endata: data
-    }
+      endata: data,
+    },
   })
 }
 
 // 确认邮箱绑定
-export function mailVerify (data: IMailVerify) {
+export function mailVerify(data: IMailVerify) {
   return request({
     url: '/mailverify/',
     method: 'POST',
     data: {
-      endata: data
-    }
+      endata: data,
+    },
   })
 }
 
 // 绑定手机
-export function smsBind (data: ISMSBind) {
+export function smsBind(data: ISMSBind) {
   return request({
     url: '/smsband/',
     method: 'POST',
     data: {
-      endata: data
-    }
+      endata: data,
+    },
   })
 }
 
 // 确认手机绑定
-export function smsVerify (data: ISMSVerify) {
+export function smsVerify(data: ISMSVerify) {
   return request({
     url: '/smsverify/',
     method: 'POST',
     data: {
-      endata: data
-    }
+      endata: data,
+    },
   })
 }

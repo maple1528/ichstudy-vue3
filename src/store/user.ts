@@ -6,7 +6,7 @@ export const useUserStore = defineStore('user', {
     return {
       token: localStorage.getItem('token') || '',
       username: '',
-      phone: null
+      phone: null,
     }
   },
   getters: {
@@ -21,7 +21,8 @@ export const useUserStore = defineStore('user', {
         const { data } = await getUserInfo()
         this.username = data.endata.data.username
         this.phone = data.endata.data.phone
-      } catch (error) {
+      }
+      catch (error) {
         localStorage.removeItem('token')
         this.token = ''
       }
@@ -29,6 +30,6 @@ export const useUserStore = defineStore('user', {
     logout() {
       localStorage.removeItem('token')
       this.token = ''
-    }
-  }
+    },
+  },
 })

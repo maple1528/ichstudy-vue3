@@ -1,20 +1,20 @@
-<template>
-  <transition name='slide-fade'>
-    <div class='page-component-up' v-if='isShow' @click='toTop'>
-      <p class="el-icon-caret-top" style="margin: 0px;"></p>
-    </div>
-  </transition>
-</template>
-
 <script setup lang='ts'>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const isShow = ref('false')
 
 const toTop = () => {
-  
+
 }
 </script>
+
+<template>
+  <transition name="slide-fade">
+    <div v-if="isShow" class="page-component-up" @click="toTop">
+      <p class="el-icon-caret-top" style="margin: 0px;" />
+    </div>
+  </transition>
+</template>
 
 <style scoped lang='less'>
   .slide-fade-enter-active {

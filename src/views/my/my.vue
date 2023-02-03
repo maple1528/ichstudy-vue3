@@ -1,9 +1,21 @@
+<script setup lang='ts'>
+import { useUserStore } from '@/store/user'
+import router from '@/router'
+
+const userStore = useUserStore()
+
+const logout = () => {
+  userStore.logout()
+  router.replace('/')
+}
+</script>
+
 <template>
   <div class="content">
-    <div class="color"></div>
-    <div class="color"></div>
-    <div class="color"></div>
-    <div class="color"></div>
+    <div class="color" />
+    <div class="color" />
+    <div class="color" />
+    <div class="color" />
 
     <div class="user-box">
       <div class="user-left">
@@ -13,36 +25,30 @@
         </div>
         <el-menu
           router
-          mode="vertical" 
+          mode="vertical"
           :default-active="$route.path"
           background-color="#00000000"
           text-color="#000"
           active-text-color="#fff"
-          @select="">
-          <el-menu-item index="/my">{{ $t('myMenu.home') }}</el-menu-item>
-          <el-menu-item index="/my/history">{{ $t('myMenu.history') }}</el-menu-item>
+        >
+          <el-menu-item index="/my">
+            {{ $t('myMenu.home') }}
+          </el-menu-item>
+          <el-menu-item index="/my/history">
+            {{ $t('myMenu.history') }}
+          </el-menu-item>
         </el-menu>
-        <button class="quit" @click="logout()">{{ $t('navList.logout') }}</button>
+        <button class="quit" @click="logout()">
+          {{ $t('navList.logout') }}
+        </button>
       </div>
-      <div class="separate-line"></div>
+      <div class="separate-line" />
       <div class="user-right">
-        <router-view></router-view>
+        <router-view />
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang='ts'>
-import { useUserStore } from '@/store/user';
-import router from "@/router";
-
-const userStore = useUserStore()
-
-const logout = () => {
-  userStore.logout()
-  router.replace('/')
-}
-</script>
 
 <style scoped lang='less'>
 .content {
@@ -60,12 +66,11 @@ const logout = () => {
   .is-active {
     background-color: #73615d;
   }
-  
+
   .el-menu-item {
     justify-content: center;
   }
 }
-
 
 .color {
   position: absolute;

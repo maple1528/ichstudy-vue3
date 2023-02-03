@@ -1,33 +1,38 @@
-<template>
-  <div class="content">
-    <div class="main">
-      <h1 class="title">{{ $t('context.title') }}</h1>
-      <p class="subtitle">{{ $t('context.subtitle') }}</p>
-      <button class="btn" @click="goTo()">{{ $t('context.start') }}</button>
-    </div>
-    <div class="bg">
-      <div class="square left"></div>
-      <div class="square left2"></div>
-      <div class="square right"></div>
-      <div class="square right2"></div>
-      <div class="square img1"></div>
-      <div class="square img2"></div>
-      <div class="square img3"></div>
-    </div>
-    <div id="bottom"></div>
-  </div>
-</template>
-
 <script setup lang='ts'>
 const goTo = () => {
   window.scrollTo({
     top: document.body.offsetHeight,
     // top: document.querySelector('.content'),
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
-
 </script>
+
+<template>
+  <div class="content">
+    <div class="main">
+      <h1 class="title">
+        {{ $t('context.title') }}
+      </h1>
+      <p class="subtitle">
+        {{ $t('context.subtitle') }}
+      </p>
+      <button class="btn" @click="goTo()">
+        {{ $t('context.start') }}
+      </button>
+    </div>
+    <div class="bg">
+      <div class="square left" />
+      <div class="square left2" />
+      <div class="square right" />
+      <div class="square right2" />
+      <div class="square img1" />
+      <div class="square img2" />
+      <div class="square img3" />
+    </div>
+    <div id="bottom" />
+  </div>
+</template>
 
 <style scoped lang='less'>
 .content {
