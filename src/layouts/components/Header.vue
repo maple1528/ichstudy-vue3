@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import Cover from '@/components/login/Cover.vue'
 
 import { useUserStore } from '@/store/user'
@@ -8,17 +8,14 @@ import useLocale from '@/hook/useLocale'
 
 import { isDark, toggleDark } from '@/composables/dark'
 
-const userStore = useUserStore()
-
-const showCover = ref(0)
-const bgColor = ref('')
-const boxShadow = ref('')
+defineOptions({ name: 'Header' })
 
 interface INavList {
   router: string
   text: string
 }
 
+// 导航栏列表项
 const navList: Array<INavList> = [
   {
     router: '/home',
@@ -38,6 +35,7 @@ const navList: Array<INavList> = [
   // }
 ]
 
+// 切换语言
 const { currentLocale, changeLocale } = useLocale()
 
 const switchLang = () => {
@@ -47,13 +45,23 @@ const switchLang = () => {
     changeLocale('zh-CN')
 }
 
+// 显示登录注册弹窗
+const showCover = ref(0)
+
 const changeCover = (type: number) => {
   showCover.value = type
 }
 
+// 退出登录
+const userStore = useUserStore()
+
 const logout = () => {
   userStore.logout()
 }
+
+// 导航栏透明度和阴影随滚动位置变化
+const bgColor = ref('')
+const boxShadow = ref('')
 
 const handleScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -65,6 +73,10 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -93,7 +105,7 @@ onMounted(() => {
         <div i-carbon-ibm-watson-language-translator />
       </div>
       <div class="icon-btn mx-2" @click="toggleDark()">
-        <div class="font-8" i="carbon-sun dark:carbon-moon" />
+        <div class="font-10" i="carbon-sun dark:carbon-moon" />
       </div>
       <div v-if="userStore.token" class="group f-c-c relative">
         <div class="w-8 h-8 b-2 mx-1 b-black rounded-full" @click="routerPush('/my')">

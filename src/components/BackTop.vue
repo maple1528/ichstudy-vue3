@@ -1,56 +1,40 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
-const isShow = ref('false')
+const isShow = ref(false)
+const scrollTop = ref(0)
 
-const toTop = () => {
-
+const handleScrollTop = () => {
+  window.scrollTo({
+    top: 0,
+  })
 }
+
+const handleScroll = () => {
+  scrollTop.value = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop
+  scrollTop.value > 500 ? (isShow.value = true) : (isShow.value = false)
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
   <transition name="slide-fade">
-    <div v-if="isShow" class="page-component-up" @click="toTop">
-      <p class="el-icon-caret-top" style="margin: 0px;" />
-    </div>
+    <button
+      v-show="isShow"
+      class=" fixed f-c-c right-16 bottom-32 w-12 h-12 rounded-full bg-amber-500/85 backdrop-blur-9 shadow-lg shadow-amber-500/85 z-99 transition"
+      @click="handleScrollTop"
+    >
+      <div class="text-8 text-white" i-carbon-caret-up />
+    </button>
   </transition>
 </template>
 
 <style scoped lang='less'>
-  .slide-fade-enter-active {
-    transition: all .1s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .1s cubic-bezier(1.0, 0.3, 0.8, 1.0);
-    opacity: 0;
-  }
-  .slide-fade-enter, .slide-fade-leave-to{
-    opacity: 0;
-  }
-  .page-component-up {
-    background-color: #ffb35dc0;
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 0px 8px #ffd7a9c0;
-    position: fixed;
-    right: 3rem;
-    bottom: 8rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    // opacity: .8;
-    transition: .3s ease;
-    // text-align: center;
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .el-icon-caret-top {
-    font-size: 28px;
-    // margin-top: 6px;
-    color: #FFFFFF;
-    text-align: center;
-    z-index: 1000
-  }
 </style>

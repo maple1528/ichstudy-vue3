@@ -21,6 +21,7 @@ export default defineConfig({
   ],
   shortcuts: [
     {
+      'flex-col': 'flex flex-col',
       'f-c-c': 'flex items-center justify-center',
       'f-c-b': 'flex items-center justify-between',
       'icon-btn': 'inline-block cursor-pointer select-none transition duration-200 ease-in-out hover:opacity-100 hover:text-amber-500',
@@ -29,7 +30,8 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      main: '#aaaaa',
+      main: '#f9f3eb',
+      deepMain: '#382321',
     },
   },
   presets: [
