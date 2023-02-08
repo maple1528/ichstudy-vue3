@@ -61,14 +61,16 @@ const logout = () => {
 
 // 导航栏透明度和阴影随滚动位置变化
 const bgColor = ref('')
+const darkBgColor = ref('')
 const boxShadow = ref('')
 
 const handleScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
   const myOpacity = Math.abs(Math.round(scrollTop)) / 1000
   const myShadow = Math.min(myOpacity / 2, 0.4)
-  bgColor.value = `rgba(249, 243, 235,${myOpacity})`
-  boxShadow.value = `5px 5px 20px rgba(115, 97, 93,${myShadow})`
+  bgColor.value = `rgba(249, 243, 235, ${myOpacity})`
+  darkBgColor.value = `rgba(63, 63, 63, ${myOpacity})`
+  boxShadow.value = `5px 5px 20px rgba(115, 97, 93, ${myShadow})`
 }
 
 onMounted(() => {
@@ -81,7 +83,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="f-c-b fixed top-0 left-0 z-99 w-full px-24 backdrop-blur-9" :style="`background-color: ${bgColor}; box-shadow: ${boxShadow};`">
+  <div class="nav f-c-b fixed top-0 left-0 z-99 w-full px-24 backdrop-blur-9">
     <div class="w-12 h-12">
       <img v-show="!isDark" class="object-contain" src="@/assets/logo.png" alt="logo">
       <img v-show="isDark" class="object-contain" src="@/assets/logo.png" alt="logo">
@@ -95,7 +97,7 @@ onUnmounted(() => {
         class="group relative mx-4"
         @click="routerPush(item.router)"
       >
-        <span class="after:(content-empty absolute left-0 -bottom-3 w-full h-1 rounded-full bg-amber-900 opacity-0 transition-all) group-hover:after:(-bottom-1 opacity-100)" />
+        <span class="dec" />
         {{ $t(item.text) }}
       </button>
     </div>
@@ -105,13 +107,13 @@ onUnmounted(() => {
         <div i-carbon-ibm-watson-language-translator />
       </div>
       <div class="icon-btn mx-2" @click="toggleDark()">
-        <div class="font-10" i="carbon-sun dark:carbon-moon" />
+        <div i="carbon-sun dark:carbon-moon" />
       </div>
       <div v-if="userStore.token" class="group f-c-c relative">
-        <div class="w-8 h-8 b-2 mx-1 b-black rounded-full" @click="routerPush('/my')">
+        <div class="w-8 h-8 b-2 mx-2 b-black rounded-full" @click="routerPush('/my')">
           <img class="object-contain" src="@/assets/avatar.svg" alt="avatar">
         </div>
-        <div class="w-20 mx-1 text-left truncate" @click="routerPush('/my')">
+        <div class="w-20 mx-2 text-left truncate" @click="routerPush('/my')">
           {{ userStore.username }}
         </div>
         <ul class="absolute left-0 top-12 p-3 rounded-3 text-center bg-white shadow divide-y-2 divide-white invisible opacity-0 transition-all delay-100 group-hover:(visible opacity-100)">
@@ -127,18 +129,18 @@ onUnmounted(() => {
       <div v-else class="f-c-c">
         <button
           type="button"
-          class="group relative mx-2"
+          class="group relative mx-3"
           @click="changeCover(1)"
         >
-          <span class="after:(content-empty absolute left-0 -bottom-3 w-full h-1 rounded-full bg-amber-900 opacity-0 transition-all) group-hover:after:(-bottom-1 opacity-100)" />
+          <span class="dec" />
           {{ $t('navList.login') }}
         </button>
         <button
           type="button"
-          class="group relative mx-3 text-white transition hover:text-amber-900"
+          class="group relative mx-4 text-white transition hover:text-mainDeep dark:hover:text-bg-light"
           @click="changeCover(2)"
         >
-          <span class="after:(content-empty absolute -left-3 -bottom-1 -z-1 w-[calc(100%+1.5rem)] h-[calc(100%+0.5rem)] rounded-full bg-amber-900 opacity-100 transition-all) group-hover:after:(-bottom-1 left-0 w-full h-1 opacity-100)" />
+          <span class="after:(content-empty absolute -left-4 -bottom-1 -z-1 w-[calc(100%+2rem)] h-[calc(100%+0.5rem)] rounded-full bg-main opacity-100 transition-all) group-hover:after:(-bottom-1 left-0 w-full h-1 opacity-100)" />
           {{ $t('navList.reg') }}
         </button>
       </div>
@@ -147,5 +149,18 @@ onUnmounted(() => {
   <Cover :type="showCover" @close="changeCover(0)" />
 </template>
 
-<style scoped lang='less'>
+<style scoped>
+.dec {
+  @apply after:(content-empty absolute left-0 -bottom-3 w-full h-1 rounded-full bg-main opacity-0 transition-all) group-hover:after:(-bottom-1 opacity-100)
+}
+
+.nav {
+  background: v-bind(bgColor);
+  box-shadow: v-bind(boxShadow);
+}
+
+.dark .nav {
+  background: v-bind(darkBgColor);
+  box-shadow: none;
+}
 </style>

@@ -1,27 +1,13 @@
-@main-color: #f9f3eb;
-@text-color-deep: #382321;
-@text-color: #73615d;
-@test-color: #e9ab5a;
-
-@HeaderH: 200px;
-
 :root {
   font-size: 16px;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
-  --el-color-primary: @text-color;
-  --el-color-primary-light-3: #92817d;
-  --el-color-primary-light-5: #b3a29e;
-  --el-color-primary-dark-2: #423231;
 }
 
 html,
@@ -33,17 +19,12 @@ body,
 }
 
 html.dark {
-  background: #121212;
+  @apply text-bgLight bg-bgDark;
   color-scheme: dark;
-}
-
-.card {
-  padding: 2rem;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: @text-color-deep;
-    background-color: @main-color;
+    @apply text-mainDeep bg-bgLight;
   }
 }
