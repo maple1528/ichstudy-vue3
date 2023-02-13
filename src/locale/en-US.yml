@@ -22,7 +22,7 @@ loginFrom:
   bind: Bind
 context:
   title: ICH Study
-  subtitle: We use international students as the main service group and use traditional Chinese culture such as non-legacy and folk crafts as the teaching content to develop online and offline research platforms.
+  subtitle: A research platform with international students as the main service group, with folk crafts and other traditional Chinese culture as the teaching content
   start: START
   more: More
   watch: Learn More

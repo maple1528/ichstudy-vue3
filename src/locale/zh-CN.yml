@@ -22,7 +22,7 @@ loginFrom:
   bind: 绑定
 context:
   title: 非遗研学
-  subtitle: 我们以留学生为主要服务群体，以非传统、民间工艺等中国传统文化为教学内容开发线上线下的研究平台
+  subtitle: 以留学生为主要服务群体，以民间工艺等中国传统文化为教学内容的研究平台
   start: 立刻开始
   more: 更多
   watch: 立刻学习
