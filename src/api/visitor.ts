@@ -7,7 +7,7 @@ export const getCourseV = () => {
 
 // 获取章节 游客模式
 export const getSectionV = (cindex: string) => {
-  return post('/vr/visitor/', { cindex })
+  return post('/course/visitor/getsection/', { cindex })
 }
 
 // 获取vr 游客模式
