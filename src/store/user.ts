@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia'
+import { useStorage } from '@vueuse/core'
 import { getUserInfo } from '@/api/user'
+
+const tokenRef = useStorage<string | undefined>('token', undefined, localStorage)
 
 export const useUserStore = defineStore('user', {
   state: () => {
     return {
-      token: localStorage.getItem('token') || '',
+      token: tokenRef,
       username: '',
       phone: null,
     }
@@ -13,7 +16,6 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     setToken(token: string) {
-      localStorage.setItem('token', token)
       this.token = token
     },
     async getInfo() {
@@ -22,13 +24,11 @@ export const useUserStore = defineStore('user', {
         this.username = data.endata.data.username
         this.phone = data.endata.data.phone
       } catch (error) {
-        localStorage.removeItem('token')
-        this.token = ''
+        this.token = undefined
       }
     },
     logout() {
-      localStorage.removeItem('token')
-      this.token = ''
+      this.token = undefined
     },
   },
 })
