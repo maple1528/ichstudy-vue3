@@ -39,12 +39,10 @@ const openVR = (url: string) => {
   const time = Number(localStorage.getItem('vrNum') || 0)
   if (localStorage.getItem('token')) {
     window.open(url, '_blank')
-  }
-  else if (time < 5) {
+  } else if (time < 5) {
     localStorage.setItem('vrNum', String(time + 1))
     window.open(url, '_blank')
-  }
-  else {
+  } else {
     ElMessage.error(tip.value)
   }
 }

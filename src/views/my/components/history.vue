@@ -28,12 +28,12 @@ onMounted(() => {
 
 <template>
   <div>
-    <el-table :data="playData.list" height="640px" stripe :header-cell-style="{ background: 'transparent', color: '#382321' }">
-      <el-table-column type="index" width="50" />
-      <el-table-column :prop="$t('historyTable.propC')" :label="$t('historyTable.course')" />
-      <el-table-column :prop="$t('historyTable.propS')" :label="$t('historyTable.section')" />
-      <el-table-column prop="ctime" :label="$t('historyTable.time')" />
-    </el-table>
+    <ElTable :data="playData.list" height="640px" stripe :header-cell-style="{ background: 'transparent', color: '#382321' }">
+      <ElTableColumn type="index" width="50" />
+      <ElTableColumn :prop="$t('historyTable.propC')" :label="$t('historyTable.course')" />
+      <ElTableColumn :prop="$t('historyTable.propS')" :label="$t('historyTable.section')" />
+      <ElTableColumn prop="ctime" :label="$t('historyTable.time')" />
+    </ElTable>
   </div>
 </template>
 

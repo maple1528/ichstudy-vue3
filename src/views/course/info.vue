@@ -33,17 +33,19 @@ const cnInfo = ref('')
 const enInfo = ref('')
 
 const title = computed(() => {
-  if (currentLocale.value === 'zh-CN')
+  if (currentLocale.value === 'zh-CN') {
     return cnTitle.value
-  else
+  } else {
     return enTitle.value
+  }
 })
 
 const info = computed(() => {
-  if (currentLocale.value === 'zh-CN')
+  if (currentLocale.value === 'zh-CN') {
     return cnInfo.value
-  else
+  } else {
     return enInfo.value
+  }
 })
 
 const getSectionList = async () => {
@@ -57,8 +59,7 @@ const getSectionList = async () => {
       const i = item as IInfo
       sectionTitleList.list.push(i)
     })
-  }
-  catch (err) {
+  } catch (err) {
   }
 }
 
@@ -76,8 +77,7 @@ const getCourseInfo = async () => {
         return
       }
     }
-  }
-  catch (err) {
+  } catch (err) {
 
   }
 }

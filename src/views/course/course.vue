@@ -1,29 +1,30 @@
 <script setup lang='ts'>
 import { onMounted, reactive } from 'vue'
 import CourseItem from './components/CourseItem.vue'
-import { getCourseV } from '@/api/visitor'
 import Footer from '@/layouts/components/Footer.vue'
+import { getCourseV } from '@/api/visitor'
+
+defineOptions({ name: 'Course' })
 
 const courseList = reactive({ list: [] })
 
-onMounted(() => {
-  getCourseV().then((res) => {
-    courseList.list = res.data.endata.data
-  })
+onMounted(async () => {
+  const res = await getCourseV()
+  courseList.list = res.data.endata.data
 })
 </script>
 
 <template>
-  <div class="content flex-column-center">
+  <div class="flex-col pt-12">
     <h1>{{ $t('navList.course') }}</h1>
-    <div class="list-box">
-      <div v-for="(item, i) in courseList.list" :key="i" class="item-box">
+    <div class="grid grid-cols-3">
+      <div
+        v-for="(item, i) in courseList.list"
+        :key="i"
+        class="w-xs h-52 my-16"
+      >
         <CourseItem :info="item" />
       </div>
-      <i />
-      <i />
-      <i />
-      <i />
     </div>
   </div>
   <Footer />
@@ -34,32 +35,21 @@ onMounted(() => {
   min-height: 100vh;
   width: 100%;
   padding-top: 60px;
-
-  h1 {
-    margin-top: 50px;
-  }
 }
 
 .list-box {
-    width: 70%;
-    margin: 20px 15%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    // width: 70%;
+    // margin: 20px 15%;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-between;
+    // flex-wrap: wrap;
 
     .item-box {
       height: 200px;
       width: 300px;
       margin: 20px 0px;
       background-color: #cfcfcf;
-    }
-
-    // .item-box:last-child {
-    //  margin-right: auto;
-    // }
-    i {
-      width: 300px;
     }
   }
 </style>

@@ -7,7 +7,7 @@ defineOptions({ name: 'AppLayout' })
 
 <template>
   <Header />
-  <router-view />
+  <RouterView />
   <BackTop />
 </template>
 

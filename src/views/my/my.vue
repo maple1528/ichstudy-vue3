@@ -23,7 +23,7 @@ const logout = () => {
           <img src="@/assets/avatar.svg">
           <h2>{{ userStore.username }}</h2>
         </div>
-        <el-menu
+        <ElMenu
           router
           mode="vertical"
           :default-active="$route.path"
@@ -31,20 +31,20 @@ const logout = () => {
           text-color="#000"
           active-text-color="#fff"
         >
-          <el-menu-item index="/my">
+          <ElMenuItem index="/my">
             {{ $t('myMenu.home') }}
-          </el-menu-item>
-          <el-menu-item index="/my/history">
+          </ElMenuItem>
+          <ElMenuItem index="/my/history">
             {{ $t('myMenu.history') }}
-          </el-menu-item>
-        </el-menu>
+          </ElMenuItem>
+        </ElMenu>
         <button class="quit" @click="logout()">
           {{ $t('navList.logout') }}
         </button>
       </div>
       <div class="separate-line" />
       <div class="user-right">
-        <router-view />
+        <RouterView />
       </div>
     </div>
   </div>

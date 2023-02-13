@@ -3,6 +3,6 @@
     "antfu.iconify", // 图标组件预览(直接将图标显示在你的HTML)
     "antfu.unocss", // unocss插件, 若使用unocss, 务必安装, 否则毫无体验可言
     "Vue.volar", // vue3官方推荐插件
-    "lokalise.i18n-ally", // i18n国际化智能显示
+    "lokalise.i18n-ally" // i18n国际化智能显示
   ]
 }

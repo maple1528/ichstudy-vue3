@@ -25,7 +25,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <transition name="slide-fade">
+  <Transition name="slide-fade">
     <button
       v-show="isShow"
       class=" fixed f-c-c right-16 bottom-32 w-12 h-12 rounded-full bg-amber-500/85 backdrop-blur-9 shadow-lg shadow-amber-500/85 z-99 transition"
@@ -33,7 +33,7 @@ onUnmounted(() => {
     >
       <div class="text-8 text-white" i-carbon-caret-up />
     </button>
-  </transition>
+  </Transition>
 </template>
 
 <style scoped lang='less'>

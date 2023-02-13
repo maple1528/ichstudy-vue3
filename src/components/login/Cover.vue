@@ -17,14 +17,14 @@ const toClose = () => {
         <img src="@/assets/logo.png" alt="logo">
       </div>
       <div class="right">
-        <el-tabs :model-value="type" tab-position="top" stretch>
-          <el-tab-pane :label="$t('navList.login')" :name="1">
+        <ElTabs :model-value="type" tab-position="top" stretch>
+          <ElTabPane :label="$t('navList.login')" :name="1">
             <LoginFrom @close="toClose" />
-          </el-tab-pane>
-          <el-tab-pane :label="$t('navList.reg')" :name="2">
+          </ElTabPane>
+          <ElTabPane :label="$t('navList.reg')" :name="2">
             <RegFrom />
-          </el-tab-pane>
-        </el-tabs>
+          </ElTabPane>
+        </ElTabs>
       </div>
       <div class="close" @click="$emit('close')">
         <img src="@/assets/close.svg" alt="close">

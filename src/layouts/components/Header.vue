@@ -39,10 +39,11 @@ const navList: Array<INavList> = [
 const { currentLocale, changeLocale } = useLocale()
 
 const switchLang = () => {
-  if (currentLocale.value === 'zh-CN')
+  if (currentLocale.value === 'zh-CN') {
     changeLocale('en-US')
-  else
+  } else {
     changeLocale('zh-CN')
+  }
 }
 
 // 显示登录注册弹窗

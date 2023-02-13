@@ -1,0 +1,25 @@
+{
+  "extends": ["@antfu"],
+  "rules": {
+    // 禁止只有一行代码时不写{}
+    "curly": [
+      "error",
+      "all"
+    ],
+    // else语句块接着上一行写
+    "@typescript-eslint/brace-style": [
+      "error",
+      "1tbs"
+    ],
+    // 不允许对响应式数据进行解构
+    "vue/no-setup-props-destructure": "off",
+    // Vue组件在template中必须使用大驼峰命名
+    "vue/component-name-in-template-casing": [
+      "error",
+      "PascalCase",
+      {
+        "registeredComponentsOnly": false
+      }
+    ]
+  }
+}

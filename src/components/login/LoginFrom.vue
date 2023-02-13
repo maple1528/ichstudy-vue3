@@ -35,8 +35,7 @@ const handleLogin = () => {
         userStore.setToken(data.endata.token)
         userStore.getInfo()
         emit('close')
-      }
-      else {
+      } else {
         ElMessage.error(data.endata.msg)
       }
     }
@@ -46,28 +45,28 @@ const handleLogin = () => {
 
 <template>
   <div>
-    <el-form
+    <ElForm
       ref="loginFormRef"
       :model="user"
       :rules="rules"
     >
-      <el-form-item prop="username">
-        <el-input v-model="user.username" :placeholder="$t('loginFrom.username')" />
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input
+      <ElFormItem prop="username">
+        <ElInput v-model="user.username" :placeholder="$t('loginFrom.username')" />
+      </ElFormItem>
+      <ElFormItem prop="password">
+        <ElInput
           v-model="user.password"
           type="password"
           :placeholder="$t('loginFrom.password')"
           show-password
         />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="handleLogin">
+      </ElFormItem>
+      <ElFormItem>
+        <ElButton type="primary" @click="handleLogin">
           {{ $t('navList.login') }}
-        </el-button>
-      </el-form-item>
-    </el-form>
+        </ElButton>
+      </ElFormItem>
+    </ElForm>
   </div>
 </template>
 

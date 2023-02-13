@@ -21,8 +21,7 @@ export const useUserStore = defineStore('user', {
         const { data } = await getUserInfo()
         this.username = data.endata.data.username
         this.phone = data.endata.data.phone
-      }
-      catch (error) {
+      } catch (error) {
         localStorage.removeItem('token')
         this.token = ''
       }

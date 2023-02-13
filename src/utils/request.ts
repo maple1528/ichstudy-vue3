@@ -9,8 +9,9 @@ const request = axios.create({
 request.interceptors.request.use(
   (config) => {
     config.headers = config.headers || {}
-    if (localStorage.getItem('token'))
+    if (localStorage.getItem('token')) {
       config.headers.token = localStorage.getItem('token') || ''
+    }
 
     return config
   },

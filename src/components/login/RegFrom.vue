@@ -26,23 +26,25 @@ const verFormRef = ref<FormInstance>()
 
 const validateName = (rule: any, value: any, callback: any) => {
   const reg = /^[0-9a-zA-Z]*$/
-  if (value === '')
+  if (value === '') {
     callback(new Error('Please input the username'))
-  else if (value.length < 6 || value.length > 20)
+  } else if (value.length < 6 || value.length > 20) {
     callback(new Error('The length must between 6-20'))
-  else if (!reg.test(value))
+  } else if (!reg.test(value)) {
     callback(new Error('The username must be letter or number'))
-  else
+  } else {
     callback()
+  }
 }
 
 const validatePass = (rule: any, value: any, callback: any) => {
-  if (value === '')
+  if (value === '') {
     callback(new Error('Please input the password again'))
-  else if (value !== user.password)
+  } else if (value !== user.password) {
     callback(new Error('Two inputs don\'t match!'))
-  else
+  } else {
     callback()
+  }
 }
 
 const validateAccount = (rule: any, value: any, callback: any) => {
@@ -50,16 +52,13 @@ const validateAccount = (rule: any, value: any, callback: any) => {
   accountType = 0
   if (value === '') {
     callback(new Error('Please input the Email or phone number'))
-  }
-  else if (validator.isEmail(value)) {
+  } else if (validator.isEmail(value)) {
     accountType = 1
     callback()
-  }
-  else if (reg.test(value)) {
+  } else if (reg.test(value)) {
     accountType = 2
     callback()
-  }
-  else {
+  } else {
     callback(new Error('Please input the correct Email or phone number'))
   }
 }
@@ -83,8 +82,7 @@ const handleRegister = () => {
       if (data.endata.su === 1) {
         ElMessage.success(data.endata.msg)
         ifNext.value = true
-      }
-      else {
+      } else {
         ElMessage.warning(data.endata.msg)
       }
     }
@@ -99,11 +97,11 @@ const sendVer = async () => {
   if (accountType === 1) {
     const param = { email: ver.account, username: user.username }
     const { data } = await mailBind(param)
-  }
-  else if (accountType === 2) {
+  } else if (accountType === 2) {
     const { data } = await register(user)
-    if (data.endata.su === 0)
+    if (data.endata.su === 0) {
       ElMessage.warning('手机号已被注册')
+    }
   }
 }
 
@@ -112,8 +110,7 @@ const handleBind = () => {
     if (valid) {
       if (accountType === 1) {
         //
-      }
-      else if (accountType === 2) {
+      } else if (accountType === 2) {
         //
       }
     }
@@ -123,51 +120,51 @@ const handleBind = () => {
 
 <template>
   <div>
-    <el-form
+    <ElForm
       v-show="!ifNext"
       ref="regFormRef"
       :model="user"
       :rules="regRules"
     >
-      <el-form-item prop="username">
-        <el-input v-model="user.username" :placeholder="$t('loginFrom.username')" />
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input v-model="user.password" :placeholder="$t('loginFrom.password')" type="password" />
-      </el-form-item>
-      <el-form-item prop="checkPwd">
-        <el-input v-model="user.checkPwd" :placeholder="$t('loginFrom.checkPwd')" type="password" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="handleRegister">
+      <ElFormItem prop="username">
+        <ElInput v-model="user.username" :placeholder="$t('loginFrom.username')" />
+      </ElFormItem>
+      <ElFormItem prop="password">
+        <ElInput v-model="user.password" :placeholder="$t('loginFrom.password')" type="password" />
+      </ElFormItem>
+      <ElFormItem prop="checkPwd">
+        <ElInput v-model="user.checkPwd" :placeholder="$t('loginFrom.checkPwd')" type="password" />
+      </ElFormItem>
+      <ElFormItem>
+        <ElButton type="primary" @click="handleRegister">
           {{ $t('loginFrom.next') }}
-        </el-button>
-      </el-form-item>
-    </el-form>
+        </ElButton>
+      </ElFormItem>
+    </ElForm>
 
-    <el-form
+    <ElForm
       v-show="ifNext"
       ref="verFormRef"
       :model="ver"
       :rules="verRules"
     >
-      <el-form-item prop="account">
-        <el-input v-model="ver.account" :placeholder="$t('loginFrom.emailPhone')" />
-      </el-form-item>
-      <el-form-item prop="ver">
+      <ElFormItem prop="account">
+        <ElInput v-model="ver.account" :placeholder="$t('loginFrom.emailPhone')" />
+      </ElFormItem>
+      <ElFormItem prop="ver">
         <div class="ver-box">
-          <el-input v-model="ver.code" :placeholder="$t('loginFrom.code')" />
-          <el-button type="primary" :disabled="ifSend" @click="sendVer">
+          <ElInput v-model="ver.code" :placeholder="$t('loginFrom.code')" />
+          <ElButton type="primary" :disabled="ifSend" @click="sendVer">
             {{ $t('loginFrom.sendCode') }} (60)
-          </el-button>
+          </ElButton>
         </div>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="handleBind">
+      </ElFormItem>
+      <ElFormItem>
+        <ElButton type="primary" @click="handleBind">
           {{ $t('loginFrom.bind') }}
-        </el-button>
-      </el-form-item>
-    </el-form>
+        </ElButton>
+      </ElFormItem>
+    </ElForm>
   </div>
 </template>
 

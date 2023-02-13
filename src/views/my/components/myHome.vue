@@ -26,16 +26,18 @@ const point = computed(() => {
 const totalTimeText = computed(() => {
   const hour = Math.floor(totalTime.value / 60)
   const min = Math.floor(totalTime.value - hour * 60)
-  if (localStorage.getItem('locale') === 'zh-CN')
+  if (localStorage.getItem('locale') === 'zh-CN') {
     return `${hour} 时 ${min} 分`
-  else
+  } else {
     return `${hour} H ${min} M`
+  }
 })
 const mTitle = computed(() => {
-  if (localStorage.getItem('locale') === 'zh-CN')
+  if (localStorage.getItem('locale') === 'zh-CN') {
     return mCnTitle
-  else
+  } else {
     return mEnTitle
+  }
 })
 
 onMounted(() => {

@@ -27,22 +27,21 @@ const routerUrl = `/course/${props.info.cindex}`
 const title = ref()
 
 onMounted(() => {
-  if (localStorage.getItem('locale') === 'zh-CN')
+  if (localStorage.getItem('locale') === 'zh-CN') {
     title.value = props.info.cnname
-  else
+  } else {
     title.value = props.info.enname
+  }
 })
 
 const toVideo = () => {
   const time = Number(localStorage.getItem('courseNum') || 0)
   if (localStorage.getItem('token')) {
     routerPush(routerUrl)
-  }
-  else if (time < 5) {
+  } else if (time < 5) {
     localStorage.setItem('courseNum', String(time + 1))
     routerPush(routerUrl)
-  }
-  else {
+  } else {
     ElMessage.error(tip.value)
   }
 }
