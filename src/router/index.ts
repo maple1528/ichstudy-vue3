@@ -97,8 +97,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if (localStorage.getItem('token')) {
-    const userStore = useUserStore()
+  const userStore = useUserStore()
+  if (userStore.token) {
     userStore.getInfo()
   }
 })
