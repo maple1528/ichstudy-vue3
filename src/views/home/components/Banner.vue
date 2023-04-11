@@ -78,6 +78,6 @@ const startBtn = () => {
 
 <style scoped>
 .grid-item {
-  @apply w-36 h-36 bg-amber-500 rounded-6;
+  @apply w-36 h-36 bg-amber-500 rounded-3xl;
 }
 </style>

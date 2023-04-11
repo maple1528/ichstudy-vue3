@@ -138,7 +138,7 @@ onUnmounted(() => {
         </button>
         <button
           type="button"
-          class="group relative mx-4 text-white transition hover:text-mainDeep dark:hover:text-bg-light"
+          class="group relative mx-4 text-white transition hover:text-text-light dark:hover:text-text-dark"
           @click="changeCover(2)"
         >
           <span class="after:(content-empty absolute -left-4 -bottom-1 -z-1 w-[calc(100%+2rem)] h-[calc(100%+0.5rem)] rounded-full bg-main opacity-100 transition-all) group-hover:after:(-bottom-1 left-0 w-full h-1 opacity-100)" />

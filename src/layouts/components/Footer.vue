@@ -3,7 +3,7 @@ defineOptions({ name: 'Footer' })
 </script>
 
 <template>
-  <div class="f-c-c h-60 text-bgLight bg-mainDeep dark:bg-mainDark">
+  <div class="f-c-c h-60 text-text-dark bg-main-deep dark:bg-main-deep-dark">
     <div class="mr-12">
       <h2>{{ $t('footer.contact') }}</h2>
       <p>{{ $t('footer.email') }}： zust_inter@foxmail.com</p>

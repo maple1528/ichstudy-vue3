@@ -32,9 +32,11 @@ export default defineConfig({
     colors: {
       main: 'rgb(245, 158, 11)', // 橙色，不随色彩模式改变
       mainDeep: '#382321', // 褐色
-      mainDark: 'rgb(63, 63, 63)', // 浅灰
+      mainDeepDark: 'rgb(63, 63, 63)', // 浅灰
       bgLight: '#f9f3eb', // 米白，日间模式主色
       bgDark: '#242424', // 深灰，夜间模式主色
+      textLight: '#382321', // 褐色
+      textDark: '#f9f3eb', // 米白
     },
   },
   presets: [
