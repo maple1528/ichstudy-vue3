@@ -2,8 +2,7 @@ import axios from 'axios'
 import { useUserStore } from '@/store/user'
 
 const request = axios.create({
-  // baseURL: import.meta.env.VITE_APP_BASE_API,
-  baseURL: 'https://api.ichstudy.com',
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 600 * 1000,
 })
 
