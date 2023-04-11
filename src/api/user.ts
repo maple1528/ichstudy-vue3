@@ -1,4 +1,4 @@
-import request, { post } from '@/utils/request'
+import request, { post } from '@/api/common/request'
 import type { IMailBind, IMailVerify, ISMSBind, ISMSVerify, IUser } from '@/api/types'
 
 // 登录

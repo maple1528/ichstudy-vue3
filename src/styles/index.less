@@ -1,3 +1,5 @@
+@import './variables.less';
+
 :root {
   font-size: 16px;
 
@@ -19,12 +21,14 @@ body,
 }
 
 html.dark {
-  @apply text-text-dark bg-bg-dark;
+  color: @text-dark;
+  background: @bg-dark;
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    @apply text-text-light bg-bg-light;
+    color: @text-light;
+    background: @bg-light;
   }
 }

@@ -108,7 +108,7 @@ onUnmounted(() => {
         <div i-carbon-ibm-watson-language-translator />
       </div>
       <div class="icon-btn mx-2" @click="toggleDark()">
-        <div i="carbon-sun dark:carbon-moon" />
+        <div i="tabler-sun-high dark:tabler-moon" />
       </div>
       <div v-if="userStore.token" class="group f-c-c relative">
         <div class="w-8 h-8 b-2 mx-2 b-black rounded-full" @click="routerPush('/my')">

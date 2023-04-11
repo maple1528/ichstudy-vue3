@@ -1,4 +1,4 @@
-import { post } from '@/utils/request'
+import { post } from '@/api/common/request'
 
 // 获取课程 游客模式
 export const getCourseV = () => {
