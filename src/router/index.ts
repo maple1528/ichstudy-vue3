@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/views/home/home.vue'),
+    component: () => import('@/views/home/Home.vue'),
   },
   {
     path: '/',
@@ -25,12 +25,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/home/home.vue'),
+        component: () => import('@/views/home/Home.vue'),
       },
       {
         path: '/course',
         name: 'course',
-        component: () => import('@/views/course/course.vue'),
+        component: () => import('@/views/course/Course.vue'),
       },
       {
         path: '/course/:id',
@@ -52,7 +52,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/vr',
         name: 'vr',
-        component: () => import('@/views/vr/vr.vue'),
+        component: () => import('@/views/vr/VR.vue'),
       },
       {
         path: '/about',
@@ -61,17 +61,17 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/my',
-        component: () => import('@/views/my/my.vue'),
+        component: () => import('@/views/my/My.vue'),
         children: [
           {
             path: '',
             name: 'myHome',
-            component: () => import('@/views/my/components/myHome.vue'),
+            component: () => import('@/views/my/components/MyHome.vue'),
           },
           {
             path: 'history',
             name: 'History',
-            component: () => import('@/views/my/components/history.vue'),
+            component: () => import('@/views/my/components/History.vue'),
           },
           // {
           //   path: 'setting',

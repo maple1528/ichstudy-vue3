@@ -23,7 +23,7 @@ const startBtn = () => {
     </div>
     <div class="absolute w-full h-full of-hidden -z-1">
       <div class="absolute right-0 bottom-0 grid grid-cols-5 gap-4 -rotate-20">
-        <div class="grid-item">
+        <!-- <div class="grid-item">
           01
         </div>
         <div class="grid-item">
@@ -70,14 +70,14 @@ const startBtn = () => {
         </div>
         <div class="grid-item">
           16
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.grid-item {
+/* .grid-item {
   @apply w-36 h-36 bg-amber-500 rounded-3xl;
-}
+} */
 </style>
