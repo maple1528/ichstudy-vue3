@@ -1,7 +1,5 @@
 <script setup lang='ts'>
-import { onMounted, reactive } from 'vue'
 import { getUserPlayData } from '@/api/user'
-import { useUserStore } from '@/store/user'
 
 const userStore = useUserStore()
 interface IData {

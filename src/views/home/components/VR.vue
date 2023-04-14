@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import useLocale from '@/hook/useLocale'
 const { currentLocale } = useLocale()
 </script>
 

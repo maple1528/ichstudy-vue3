@@ -1,12 +1,7 @@
 <script setup lang='ts'>
-import { onMounted, onUnmounted, ref } from 'vue'
 import Cover from '@/components/login/Cover.vue'
-
-import { useUserStore } from '@/store/user'
-import { routerPush } from '@/utils/common'
-import useLocale from '@/hook/useLocale'
-
 import { isDark, toggleDark } from '@/composables/dark'
+import { routerPush } from '@/utils/common'
 
 defineOptions({ name: 'Header' })
 

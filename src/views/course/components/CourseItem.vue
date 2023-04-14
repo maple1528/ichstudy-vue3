@@ -1,9 +1,9 @@
 <script setup lang='ts'>
 import { ElMessage } from 'element-plus'
-import { computed, onMounted, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { getFileUrl, routerPush } from '@/utils/common'
+
 const props = defineProps<{ info: IInfo }>()
+defineOptions({ name: 'CourseItem' })
 
 const { t } = useI18n()
 

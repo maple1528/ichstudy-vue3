@@ -1,11 +1,8 @@
 <script setup lang='ts'>
-import { computed, onMounted, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
-import { useI18n } from 'vue-i18n'
 import Footer from '@/layouts/components/Footer.vue'
 import { getFileUrl } from '@/utils/common'
 import { getVrV } from '@/api/visitor'
-import useLocale from '@/hook/useLocale'
 
 const vrList = reactive({ list: [] as IInfo[] })
 const { t } = useI18n()

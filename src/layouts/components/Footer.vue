@@ -21,4 +21,5 @@ defineOptions({ name: 'Footer' })
 </template>
 
 <style scoped lang='less'>
+
 </style>

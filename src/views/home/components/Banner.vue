@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 defineOptions({ name: 'HomeBanner' })
+
 const startBtn = () => {
   window.scrollTo({
     top: document.body.offsetHeight,
@@ -76,7 +77,7 @@ const startBtn = () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 /* .grid-item {
   @apply w-36 h-36 bg-amber-500 rounded-3xl;
 } */

@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+defineOptions({ name: 'About' })
 </script>
 
 <template>

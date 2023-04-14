@@ -1,9 +1,6 @@
 <script setup lang='ts'>
-import { computed, onMounted, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { getCourseV, getSectionV } from '@/api/visitor'
 import { getFileUrl } from '@/utils/common'
-import useLocale from '@/hook/useLocale'
 
 // import "vue3-video-play/dist/style.css";
 // import { videoPlay } from "vue-video-play";

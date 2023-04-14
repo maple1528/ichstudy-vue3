@@ -1,5 +1,7 @@
 {
-  "extends": ["@antfu"],
+  "extends": [
+    "@antfu"
+  ],
   "rules": {
     // 禁止只有一行代码时不写{}
     "curly": [
@@ -21,5 +23,9 @@
         "registeredComponentsOnly": false
       }
     ]
-  }
+  },
+  "ignorePatterns": [
+    "components.d.ts",
+    "auto-imports.d.ts"
+  ]
 }

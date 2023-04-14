@@ -1,6 +1,4 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
-import useLocale from '@/hook/useLocale'
 const { currentLocale } = useLocale()
 
 interface IData {

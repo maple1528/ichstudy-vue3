@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
 import CourseItem from './components/CourseItem.vue'
 import Footer from '@/layouts/components/Footer.vue'
 import { getCourseV } from '@/api/visitor'
@@ -32,5 +31,5 @@ onMounted(async () => {
   <Footer />
 </template>
 
-<style scoped>
+<style scoped lang="less">
 </style>
