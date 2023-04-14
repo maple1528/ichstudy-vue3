@@ -5,5 +5,6 @@
     "antfu.iconify", // 图标组件预览(直接将图标显示在你的HTML)
     "antfu.unocss", // unocss插件, 若使用unocss, 务必安装, 否则毫无体验可言
     // "voorjaar.windicss-intellisense", // windicss插件，unocss插件智能提示不全或失效时可以安装
+    // unocss插件失效原因可能是该页面有报错warning，有点迷惑
   ]
 }
