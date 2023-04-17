@@ -2,14 +2,6 @@
 import { ElMessage } from 'element-plus'
 import { getFileUrl, routerPush } from '@/utils/common'
 
-const props = defineProps<{ info: IInfo }>()
-defineOptions({ name: 'CourseItem' })
-
-const { t } = useI18n()
-
-const tip = computed(() => {
-  return t('errorTips.watchCourse')
-})
 interface IInfo {
   cindex: string
   cninfo: string
@@ -21,30 +13,40 @@ interface IInfo {
   status: number
 }
 
+const props = defineProps<{ info: IInfo }>()
+
+defineOptions({ name: 'CourseItem' })
+
 const imgUrl = getFileUrl('img', props.info.imgpath)
 const routerUrl = `/course/${props.info.cindex}`
 
-const title = ref()
+const { t } = useI18n()
+const { token } = useUserStore()
+const { courseNum, setNumber } = useVisitorStore()
 
-onMounted(() => {
-  if (localStorage.getItem('locale') === 'zh-CN') {
-    title.value = props.info.cnname
-  } else {
-    title.value = props.info.enname
-  }
+const tip = computed(() => {
+  return t('errorTips.watchCourse')
 })
-
 const toVideo = () => {
-  const time = Number(localStorage.getItem('courseNum') || 0)
-  if (localStorage.getItem('token')) {
+  if (token) {
     routerPush(routerUrl)
-  } else if (time < 5) {
-    localStorage.setItem('courseNum', String(time + 1))
+  } else if (courseNum < 5) {
+    setNumber('course', courseNum + 1)
     routerPush(routerUrl)
   } else {
     ElMessage.error(tip.value)
   }
 }
+
+const title = ref()
+const { currentLocale } = useLocale()
+onMounted(() => {
+  if (currentLocale.value === 'zh-CN') {
+    title.value = props.info.cnname
+  } else {
+    title.value = props.info.enname
+  }
+})
 </script>
 
 <template>

@@ -4,14 +4,6 @@ import Footer from '@/layouts/components/Footer.vue'
 import { getFileUrl } from '@/utils/common'
 import { getVrV } from '@/api/visitor'
 
-const vrList = reactive({ list: [] as IInfo[] })
-const { t } = useI18n()
-
-const { currentLocale } = useLocale()
-const tip = computed(() => {
-  return t('errorTips.watchVR')
-})
-
 interface IInfo {
   cover: string
   vr_panoramic_cover: string
@@ -23,32 +15,42 @@ interface IInfo {
   id: number
 }
 
-onMounted(() => {
-  getVrV().then((res) => {
-    vrList.list = res.data.endata.data.map((item: IInfo) => {
-      item.cover = getFileUrl('img', item.cover)
-      return item
-    })
-  })
+const vrList: Ref<Array<IInfo>> = ref([])
+
+const { currentLocale } = useLocale()
+
+const { t } = useI18n()
+const { token } = useUserStore()
+const { vrNum, setNumber } = useVisitorStore()
+
+const tip = computed(() => {
+  return t('errorTips.watchVR')
 })
 
 const openVR = (url: string) => {
-  const time = Number(localStorage.getItem('vrNum') || 0)
-  if (localStorage.getItem('token')) {
+  if (token) {
     window.open(url, '_blank')
-  } else if (time < 5) {
-    localStorage.setItem('vrNum', String(time + 1))
+  } else if (vrNum < 5) {
+    setNumber('vr', vrNum + 1)
     window.open(url, '_blank')
   } else {
     ElMessage.error(tip.value)
   }
 }
+
+onMounted(async () => {
+  const res = await getVrV()
+  vrList.value = res.data.endata.data.map((item: IInfo) => {
+    item.cover = getFileUrl('img', item.cover)
+    return item
+  })
+})
 </script>
 
 <template>
   <div class="content">
     <h1>{{ $t('navList.vr') }}</h1>
-    <div v-for="(item, index) in vrList.list" :key="index" class="vr-item">
+    <div v-for="(item, index) in vrList" :key="index" class="vr-item">
       <img :src="item.cover">
       <div class="right">
         <h2>{{ currentLocale === 'zh-CN' ? item.vrcnname : item.vrenname }}</h2>
