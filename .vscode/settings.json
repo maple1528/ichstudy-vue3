@@ -3,6 +3,7 @@
     "src/locale"
   ],
   "i18n-ally.sourceLanguage": "en-US",
+  "i18n-ally.displayLanguage": "en-US",
   "i18n-ally.keystyle": "nested",
   "prettier.enable": false,
   "editor.formatOnSave": false,
