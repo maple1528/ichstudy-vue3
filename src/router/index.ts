@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/views/home/Home.vue'),
+    component: () => import('@/views/home/home.vue'),
   },
   {
     path: '/',
@@ -25,12 +25,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/home',
         name: 'home',
-        component: () => import('@/views/home/Home.vue'),
+        component: () => import('@/views/home/home.vue'),
       },
       {
         path: '/course',
         name: 'course',
-        component: () => import('@/views/course/Course.vue'),
+        component: () => import('@/views/course/course.vue'),
       },
       {
         path: '/course/:id',
@@ -52,26 +52,26 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/vr',
         name: 'vr',
-        component: () => import('@/views/vr/VR.vue'),
+        component: () => import('@/views/vr/vr.vue'),
       },
       {
         path: '/about',
         name: 'about',
-        component: () => import('@/views/about/About.vue'),
+        component: () => import('@/views/about/about.vue'),
       },
       {
         path: '/my',
-        component: () => import('@/views/my/My.vue'),
+        component: () => import('@/views/my/my.vue'),
         children: [
           {
             path: '',
             name: 'myHome',
-            component: () => import('@/views/my/components/MyHome.vue'),
+            component: () => import('@/views/my/components/myHome.vue'),
           },
           {
             path: 'history',
             name: 'History',
-            component: () => import('@/views/my/components/History.vue'),
+            component: () => import('@/views/my/components/history.vue'),
           },
           // {
           //   path: 'setting',
@@ -96,14 +96,14 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach(() => {
   const userStore = useUserStore()
   if (userStore.token) {
     userStore.getInfo()
   }
 })
 
-router.afterEach((to, from) => {
+router.afterEach(() => {
   window.scrollTo(0, 0)
 })
 

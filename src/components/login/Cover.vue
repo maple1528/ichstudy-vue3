@@ -26,26 +26,27 @@ const toClose = () => {
           </ElTabPane>
         </ElTabs>
       </div>
-      <div class="close" @click="$emit('close')">
-        <img src="@/assets/close.svg" alt="close">
-      </div>
+      <div class="color-bg-dark absolute top-6 right-6 cursor-pointer i-tabler-x" @click="$emit('close')" />
     </div>
   </div>
 </template>
+
+<style lang="less">
+</style>
 
 <style scoped lang='less'>
 .cover-box {
   height: 100vh;
   width: 100%;
   position: fixed;
-  z-index: 99;
+  z-index: 100;
   background-color: #000000b6;
+  backdrop-filter: blur(10px);
 }
 
 .cover {
   height: 500px;
   width: 800px;
-  background-color: aliceblue;
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -54,24 +55,11 @@ const toClose = () => {
   transform: translate(-50%, -60%);
   border-radius: 20px;
   overflow: hidden;
-
-  .close {
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    img {
-      height: 100%;
-      width: 100%;
-    }
-  }
-
 }
 .left {
   width: 40%;
   display: flex;
-  background-color: antiquewhite;
+  background-color: #ffeeda;
   img {
     margin: auto;
     height: 200px;
@@ -79,12 +67,17 @@ const toClose = () => {
   }
 }
 
-.right {
-  @paddingT: 30px;
-  @paddingL: 50px;
+.dark .left {
+  background-color: #959494;
+}
 
-  width: calc(60% - 2 * @paddingL);
-  padding: @paddingT @paddingL;
+.right {
+  width: 60%;
+  padding: 30px 50px;
   background-color: #ffffff;
+}
+
+.dark .right {
+  background-color: @main-deep-dark;
 }
 </style>

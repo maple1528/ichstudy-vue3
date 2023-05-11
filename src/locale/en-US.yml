@@ -26,15 +26,20 @@ context:
   start: START
   more: More
   watch: Learn More
+  back: Back
 myMenu:
   home: Home Page
   history: History
 errorTips:
   enterUsername: Please Enter the Username
   enterPassword: Please Enter the Password
+  enterPasswordAgain: Please Enter the Password Again
   enterCode: Please Enter the Code
   enterEmailPhone: Please Enter the Email or Phone Number
   enterCorrectEmailPhone: Please Enter the Correct Email or Phone Number
+  length: The Length Mast Between 6-20
+  letterOrNumber: The Username Must Be Letter or Number
+  notMatch: Two inputs don't match!
   registeredPhone: This Phone has Already be Registered
   watchCourse: Please Check Out More Courses After Login
   watchVR: Please Check Out More VR After Login
@@ -52,3 +57,5 @@ historyTable:
   propS: scen
 vr:
   browser: Browser
+course:
+  list: Sections

@@ -6,6 +6,7 @@ import router from './router'
 import i18n from './locale'
 
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@unocss/reset/tailwind.css'
 import './styles/index.less'
 import 'uno.css'

@@ -26,15 +26,20 @@ context:
   start: 立刻开始
   more: 更多
   watch: 立刻学习
+  back: 返回
 myMenu:
   home: 个人主页
   history: 历史记录
 errorTips:
   enterUsername: 请输入账号
   enterPassword: 请输入密码
+  enterPasswordAgain: 请再次输入密码
   enterCode: 请输入验证码
   enterEmailPhone: 请先输入邮箱或手机号
   enterCorrectEmailPhone: 请先输入正确的邮箱或手机号
+  length: 长度需在6-20位
+  letterOrNumber: 用户名需为字母或数字
+  notMatch: 两次输入不一致
   registeredPhone: 手机号已被注册
   watchCourse: 请在登录后查看更多课程
   watchVR: 请在登录后查看更多VR展示
@@ -52,3 +57,5 @@ historyTable:
   propS: sccn
 vr:
   browser: 浏览
+course:
+  list: 章节选择

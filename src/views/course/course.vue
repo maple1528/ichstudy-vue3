@@ -18,11 +18,11 @@ onMounted(async () => {
     <div class="my-4 text-8">
       {{ $t('navList.course') }}
     </div>
-    <div class="grid grid-cols-3">
+    <div class="course-list">
       <div
         v-for="(item, i) in courseList"
         :key="i"
-        class="w-xs h-52 m-6"
+        class="max-h-52 m-6"
       >
         <CourseItem :info="item" />
       </div>
@@ -32,4 +32,9 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="less">
+.course-list {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
 </style>

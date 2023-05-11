@@ -1,10 +1,10 @@
 <script setup lang='ts'>
-import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import validator from 'validator'
 import { mailBind, register } from '@/api/user'
 
+const { t } = useI18n()
 const loading = ref(false)
 const ifNext = ref(false)
 const ifSend = ref(false)
@@ -27,11 +27,11 @@ const verFormRef = ref<FormInstance>()
 const validateName = (rule: any, value: any, callback: any) => {
   const reg = /^[0-9a-zA-Z]*$/
   if (value === '') {
-    callback(new Error('Please input the username'))
+    callback(new Error(t('errorTips.enterUsername')))
   } else if (value.length < 6 || value.length > 20) {
-    callback(new Error('The length must between 6-20'))
+    callback(new Error(t('errorTips.length')))
   } else if (!reg.test(value)) {
-    callback(new Error('The username must be letter or number'))
+    callback(new Error(t('errorTips.letterOrNumber')))
   } else {
     callback()
   }
@@ -39,9 +39,9 @@ const validateName = (rule: any, value: any, callback: any) => {
 
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
-    callback(new Error('Please input the password again'))
+    callback(new Error(t('errorTips.enterPasswordAgain')))
   } else if (value !== user.password) {
-    callback(new Error('Two inputs don\'t match!'))
+    callback(new Error(t('errorTips.notMatch')))
   } else {
     callback()
   }
@@ -51,7 +51,7 @@ const validateAccount = (rule: any, value: any, callback: any) => {
   const reg = /^1[345789]\d{9}$/
   accountType = 0
   if (value === '') {
-    callback(new Error('Please input the Email or phone number'))
+    callback(new Error(t('errorTips.enterEmailPhone')))
   } else if (validator.isEmail(value)) {
     accountType = 1
     callback()
@@ -59,19 +59,19 @@ const validateAccount = (rule: any, value: any, callback: any) => {
     accountType = 2
     callback()
   } else {
-    callback(new Error('Please input the correct Email or phone number'))
+    callback(new Error(t('errorTips.enterCorrectEmailPhone')))
   }
 }
 
 const regRules = reactive<FormRules>({
   username: [{ validator: validateName, trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  password: [{ required: true, message: t('errorTips.enterPassword'), trigger: 'blur' }],
   checkPwd: [{ validator: validatePass, trigger: 'blur' }],
 })
 
 const verRules = reactive<FormRules>({
   account: [{ validator: validateAccount, trigger: 'blur' }],
-  ver: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+  ver: [{ required: true, message: t('errorTips.enterCode'), trigger: 'blur' }],
 })
 
 const handleRegister = () => {
@@ -91,7 +91,7 @@ const handleRegister = () => {
 
 const sendVer = async () => {
   if (accountType === 0) {
-    ElMessage.warning('请先输入邮箱或手机号')
+    ElMessage.warning(t('errorTips.enterEmailPhone'))
     return
   }
   if (accountType === 1) {
@@ -100,7 +100,7 @@ const sendVer = async () => {
   } else if (accountType === 2) {
     const { data } = await register(user)
     if (data.endata.su === 0) {
-      ElMessage.warning('手机号已被注册')
+      ElMessage.warning(t('errorTips.registeredPhone'))
     }
   }
 }

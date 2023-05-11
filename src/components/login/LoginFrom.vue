@@ -1,10 +1,7 @@
 <script setup lang='ts'>
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
-import { computed, reactive, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { login } from '@/api/user'
-import { useUserStore } from '@/store/user'
 
 const emit = defineEmits(['close'])
 const loading = ref(false)
@@ -70,5 +67,5 @@ const handleLogin = () => {
   </div>
 </template>
 
-<style scoped lang='less'>
+<style lang='less'>
 </style>

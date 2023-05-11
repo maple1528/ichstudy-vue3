@@ -1,4 +1,5 @@
 @import './variables.less';
+@import './element.less';
 
 :root {
   font-size: 16px;
@@ -18,6 +19,15 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+:root, html.dark {
+  --el-color-primary: @main;
+  --el-color-primary-light-3: @main-light-3;
+  --el-color-primary-light-5: @main-light-5;
+  --el-color-primary-light-7: @main-light-7;
+  --el-color-primary-light-9: @main-light-9;
+  --el-color-primary-dark-2: @main-dark-2;
 }
 
 html.dark {

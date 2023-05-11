@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { getCourseV, getSectionV } from '@/api/visitor'
+import router from '@/router'
 import { getFileUrl } from '@/utils/common'
 
 // import "vue3-video-play/dist/style.css";
@@ -85,6 +86,10 @@ const changeVideo = (index: number) => {
   currentUrl.value = getFileUrl('video', info.videopath)
 }
 
+const back = () => {
+  router.go(-1)
+}
+
 onMounted(() => {
   // getSectionList()
   getCourseInfo()
@@ -92,11 +97,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="content flex-center-item">
+  <div class="content f-c-c">
     <div class="left">
-      <h1 class="title">
-        {{ title }}
-      </h1>
+      <div class="flex items-center mb-5">
+        <button class="f-c-c p-1 pl-2 pr-3 rounded-99 back-btn" @click="back()">
+          <div i-tabler-chevron-left />
+          {{ $t('context.back') }}
+        </button>
+        <h1 class="title font-600 text-size-6 ml-3">
+          {{ title }}
+        </h1>
+      </div>
       <video
         controls
         :src="currentUrl"
@@ -109,6 +120,9 @@ onMounted(() => {
       </p>
     </div>
     <div class="right">
+      <div class="right-title">
+        {{ $t('course.list') }}
+      </div>
       <ul>
         <li
           v-for="(item, i) in sectionTitleList.list"
@@ -136,6 +150,23 @@ video {
   margin: auto;
 }
 
+.back-btn {
+  background-color: #d7d3d0;
+  transition: .3s;
+}
+
+.back-btn:hover {
+  background-color: #c4bfbe;
+}
+
+.dark .back-btn {
+  background-color: @main-deep-dark;
+}
+
+.dark .back-btn:hover {
+  background-color: #555555;
+}
+
 .left {
   width: 50%;
   height: 80%;
@@ -145,6 +176,7 @@ video {
     max-height: 150px;
     width: 100%;
     overflow: auto;
+    margin-top: 30px;
   }
 
   .info::-webkit-scrollbar {/*滚动条整体样式*/
@@ -171,9 +203,12 @@ video {
   justify-content: flex-start;
   align-items: flex-start;
 
+  .right-title {
+    margin-top: 50px;
+  }
+
   ul {
     width: 100%;
-    margin-top: 70px;
     padding: 0;
     list-style: none;
 
