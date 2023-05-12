@@ -48,8 +48,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="content">
-    <h1>{{ $t('navList.vr') }}</h1>
+  <div class="f-c-c flex-col pt-12">
+    <div class="my-4 text-8">
+      {{ $t('navList.vr') }}
+    </div>
     <div v-for="(item, index) in vrList" :key="index" class="vr-item">
       <img :src="item.cover">
       <div class="right">
@@ -65,16 +67,6 @@ onMounted(async () => {
 </template>
 
 <style scoped lang='less'>
-.content {
-  min-height: 100vh;
-  width: 100%;
-  padding-top: 60px;
-
-  h1 {
-    margin-top: 50px;
-  }
-}
-
 .vr-item {
   width: 70%;
   margin: 40px 15%;
@@ -88,26 +80,33 @@ onMounted(async () => {
     object-fit: cover;
     border-radius: 10px;
   }
+}
+.right {
+  width: calc(70% - 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .right {
-    width: calc(70% - 300px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
 
-    p {
-      height: 145px;
-      overflow : hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 6;
-      -webkit-box-orient: vertical;
-    }
+  p {
+    height: 145px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
 
-    button {
-      width: 60%;
-      margin-top: 20px;
-    }
+  .btn {
+    width: 60%;
+    padding: 10px 5px;
+    margin-top: 20px;
+    background-color: @main;
+    border-radius: 99px;
   }
 }
 </style>

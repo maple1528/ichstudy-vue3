@@ -1,7 +1,6 @@
 <script setup lang='ts'>
 import { getUserPlayData } from '@/api/user'
 
-const userStore = useUserStore()
 interface IData {
   cscn: string
   csen: string
@@ -11,22 +10,25 @@ interface IData {
   scen: string
 }
 
+const userStore = useUserStore()
+
 // const tableH = computed(() => {
 //   return document.body.clientHeight
 // })
-const playData = reactive({ list: [] })
+
+const playData: Ref<IData[]> = ref([])
 
 onMounted(() => {
   getUserPlayData(userStore.username)
     .then((res) => {
-      playData.list = res.data.endata.data
+      playData.value = res.data.endata.data
     })
 })
 </script>
 
 <template>
   <div>
-    <ElTable :data="playData.list" height="640px" stripe :header-cell-style="{ background: 'transparent', color: '#382321' }">
+    <ElTable :data="playData" height="640px" stripe :header-cell-style="{ background: 'transparent' }">
       <ElTableColumn type="index" width="50" />
       <ElTableColumn :prop="$t('historyTable.propC')" :label="$t('historyTable.course')" />
       <ElTableColumn :prop="$t('historyTable.propS')" :label="$t('historyTable.section')" />
@@ -37,18 +39,28 @@ onMounted(() => {
 
 <style lang='less'>
 .el-table, .el-table__expanded-cell {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .el-table th, .el-table tr {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .el-table__body tr:hover > td{
-    background-color: #fff8f1e1 !important;
+  background-color: #fff8f1e1 !important;
 }
 
 .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
   background: #f9f3eb5d;
+}
+
+.dark {
+  .el-table__body tr:hover > td{
+    background-color: #858585e1 !important;
+  }
+
+  .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background: #7171715d;
+  }
 }
 </style>

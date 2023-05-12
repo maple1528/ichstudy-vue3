@@ -27,7 +27,6 @@ const logout = () => {
           mode="vertical"
           :default-active="$route.path"
           background-color="#00000000"
-          text-color="#000"
           active-text-color="#fff"
         >
           <ElMenuItem index="/my">
@@ -63,11 +62,13 @@ const logout = () => {
   margin-bottom: 140px;
 
   .is-active {
-    background-color: #73615d;
+    background-color: @main;
   }
 
   .el-menu-item {
     justify-content: center;
+    margin: 3px 0px;
+    border-radius: 99px;
   }
 }
 
@@ -105,7 +106,9 @@ const logout = () => {
   width: 500px;
   background-color: #e6cab2e0;
 }
-
+.dark .color {
+  background-color: transparent;
+}
 .user-box {
   height: 80%;
   width: 80%;
@@ -123,6 +126,10 @@ const logout = () => {
   backdrop-filter: blur(50px);
 }
 
+.dark .user-box {
+  background-color: #6a6a6a70;
+}
+
 .user-left {
   height: 64%;
   width: 200px;
@@ -137,11 +144,20 @@ const logout = () => {
     height: 80px;
     border: 5px solid #000000;
     border-radius: 50%;
+    margin-bottom: 20px;
   }
 
-  button {
+  h2 {
+    text-align: center;
+    line-height: 40px;
+  }
+
+  .quit {
     width: 200px;
-    height: 50px;
+    height: 56px;
+    background-color: @main;
+    color: @text-dark;
+    border-radius: 99px;
   }
 }
 

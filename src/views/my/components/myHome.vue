@@ -56,11 +56,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="my-home flex-column-center">
-    <h1 class="left-title">
+  <div class="my-home">
+    <div class="left-title">
       {{ $t('myHomeText.title') }}
-    </h1>
-    <div class="top-box flex-between-center">
+    </div>
+    <div class="top-box">
       <div class="c-box">
         <h3 class="title">
           {{ $t('myHomeText.point') }}
