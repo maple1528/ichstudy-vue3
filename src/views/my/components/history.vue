@@ -12,6 +12,7 @@ interface IData {
 
 const userStore = useUserStore()
 
+// TODO: 自适应高度
 // const tableH = computed(() => {
 //   return document.body.clientHeight
 // })
@@ -30,9 +31,10 @@ onMounted(() => {
   <div>
     <ElTable :data="playData" height="640px" stripe :header-cell-style="{ background: 'transparent' }">
       <ElTableColumn type="index" width="50" />
-      <ElTableColumn :prop="$t('historyTable.propC')" :label="$t('historyTable.course')" />
+      <ElTableColumn width="200" :prop="$t('historyTable.propC')" :label="$t('historyTable.course')" />
       <ElTableColumn :prop="$t('historyTable.propS')" :label="$t('historyTable.section')" />
-      <ElTableColumn prop="ctime" :label="$t('historyTable.time')" />
+      <ElTableColumn width="180" prop="ctime" :label="$t('historyTable.time')" />
+      <ElTableColumn width="180" prop="playcounts" :label="$t('historyTable.num')" />
     </ElTable>
   </div>
 </template>

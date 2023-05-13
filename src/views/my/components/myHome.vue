@@ -1,7 +1,8 @@
 <script setup lang='ts'>
+import type { ECOption } from '@/hook/useECharts'
 import { getUserPlayData } from '@/api/user'
+import BaseECharts from '@/components/BaseECharts.vue'
 
-const userStore = useUserStore()
 interface IData {
   cscn: string
   csen: string
@@ -11,93 +12,203 @@ interface IData {
   scen: string
 }
 
+interface IPieData {
+  value: number
+  name: string
+}
+
+const userStore = useUserStore()
+const { currentLocale } = useLocale()
+
 // let playData = reactive({})
 const totalTime = ref(0)
 const totalNum = ref(0)
-const mCnTitle = ref('')
-const mEnTitle = ref('')
+const mTitleCN = ref('')
+const mTitleEN = ref('')
 const mNum = ref(0)
+const coursePlayData: Ref<IData[]> = ref([])
 
 const point = computed(() => {
+  // TODO: 积分系统需要完善
+  // 目前设想：看完一个视频计一分
+  // 此处简单计算了一下，每看十分钟计一分
   return Math.floor(totalTime.value / 10)
 })
+
 const totalTimeText = computed(() => {
   const hour = Math.floor(totalTime.value / 60)
   const min = Math.floor(totalTime.value - hour * 60)
-  if (localStorage.getItem('locale') === 'zh-CN') {
+  if (currentLocale.value === 'zh-CN') {
     return `${hour} 时 ${min} 分`
   } else {
     return `${hour} H ${min} M`
   }
 })
+
 const mTitle = computed(() => {
-  if (localStorage.getItem('locale') === 'zh-CN') {
-    return mCnTitle
+  if (currentLocale.value === 'zh-CN') {
+    return mTitleCN
   } else {
-    return mEnTitle
+    return mTitleEN
   }
 })
 
-onMounted(() => {
-  getUserPlayData(userStore.username)
-    .then((res) => {
-      const playData: IData[] = res.data.endata.data
-      playData.forEach((item) => {
-        totalNum.value += item.playcounts
-        totalTime.value += parseInt(item.ctime)
-        if (item.playcounts > mNum.value) {
-          mNum.value = item.playcounts
-          mCnTitle.value = item.sccn
-          mEnTitle.value = item.scen
-        }
-      })
+const numPlayData = computed(() => {
+  let data = []
+  if (currentLocale.value === 'zh-CN') {
+    data = coursePlayData.value.map((item) => {
+      return {
+        value: item.playcounts,
+        name: item.cscn,
+      }
     })
+  } else {
+    data = coursePlayData.value.map((item) => {
+      return {
+        value: item.playcounts,
+        name: item.csen,
+      }
+    })
+  }
+  return data.sort((a, b) => b.value - a.value)
+})
+
+const timePlayData = computed(() => {
+  let data = []
+  if (currentLocale.value === 'zh-CN') {
+    data = coursePlayData.value.map((item) => {
+      return {
+        value: parseInt(item.ctime),
+        name: item.cscn,
+      }
+    })
+  } else {
+    data = coursePlayData.value.map((item) => {
+      return {
+        value: parseInt(item.ctime),
+        name: item.csen,
+      }
+    })
+  }
+  return data.sort((a, b) => b.value - a.value)
+})
+
+const numOption: Ref<ECOption> = ref({})
+const timeOption: Ref<ECOption> = ref({})
+
+const initECharts = (playData: IPieData[], option: Ref<ECOption>) => {
+  let data: IPieData[] = []
+  if (playData.length > 10) {
+    data = playData.slice(0, 10)
+    const sum = playData.slice(11).reduce((total, current) => {
+      return total + current.value
+    }, 0)
+    data.push({
+      value: sum,
+      name: currentLocale.value === 'zh-CN' ? '其他' : 'other',
+    })
+  }
+  option.value = {
+    backgroundColor: '',
+    tooltip: {},
+    series: [
+      {
+        type: 'pie',
+        data,
+        radius: ['10%', '60%'],
+        itemStyle: {
+          borderWidth: 3,
+          // borderColor: '#ffffff',
+          borderRadius: 5,
+        },
+      },
+    ],
+  }
+}
+
+onMounted(async () => {
+  const res = await getUserPlayData(userStore.username)
+  const data: IData[] = res.data.endata.data
+  data.sort((a, b) => {
+    if (a.csen > b.csen) {
+      return 1
+    } else if (a.csen < b.csen) {
+      return -1
+    } else {
+      return 0
+    }
+  })
+  coursePlayData.value.push(data[0])
+  let courseIndex = 0
+  for (let i = 1; i < data.length; i++) {
+    if (data[i].csen === data[i - 1].csen) {
+      coursePlayData.value[courseIndex].playcounts += data[i].playcounts
+      coursePlayData.value[courseIndex].ctime = (parseInt(coursePlayData.value[courseIndex].ctime) + parseInt(data[i].ctime)).toString()
+    } else {
+      courseIndex++
+      coursePlayData.value.push(data[i])
+    }
+  }
+  for (const item of data) {
+    totalNum.value += item.playcounts
+    totalTime.value += parseInt(item.ctime)
+    if (item.playcounts > mNum.value) {
+      mNum.value = item.playcounts
+      mTitleCN.value = item.sccn
+      mTitleEN.value = item.scen
+    }
+  }
+  initECharts(numPlayData.value, numOption)
+  initECharts(timePlayData.value, timeOption)
 })
 </script>
 
 <template>
   <div class="my-home">
-    <div class="left-title">
+    <div class="home-title">
       {{ $t('myHomeText.title') }}
     </div>
-    <div class="top-box">
-      <div class="c-box">
-        <h3 class="title">
-          {{ $t('myHomeText.point') }}
-        </h3>
-        <div class="num">
-          {{ point }}
-        </div>
+    <!-- <div class="point">
+      <div class="title">
+        {{ $t('myHomeText.point') }}
       </div>
-      <div class="c-box">
-        <h3 class="title">
-          {{ $t('myHomeText.totalTime') }}
-        </h3>
-        <div class="num">
-          {{ totalTimeText }}
-        </div>
+      <div class="num">
+        {{ point }}
       </div>
-      <div class="c-box">
-        <h3 class="title">
-          {{ $t('myHomeText.totalNum') }}
-        </h3>
-        <div class="num">
-          {{ totalNum }}
+    </div> -->
+    <div class="charts">
+      <div class="charts-card">
+        <div class="card-title">
+          <div class="title-left">
+            <!-- <div i-tabler-clock-filled /> -->
+            <div i-tabler-clock-hour-4 />
+          </div>
+          <div class="title-right">
+            <div class="title">
+              {{ $t('myHomeText.totalTime') }}
+            </div>
+            <div class="num">
+              {{ totalTimeText }}
+            </div>
+          </div>
         </div>
+        <BaseECharts height="400px" :options="numOption" />
       </div>
-    </div>
-    <div class="separate" />
-    <div class="bot-box">
-      <h3 class="left-title">
-        {{ $t('myHomeText.mostVideo') }}
-      </h3>
-      <div class="v-list flex-between-center">
-        <div class="v-title">
-          {{ mTitle }}
+      <div class="charts-card">
+        <div class="card-title">
+          <div class="title-left">
+            <div i-tabler-versions />
+          </div>
+          <div class="title-right">
+            <div class="title">
+              {{ $t('myHomeText.totalNum') }}
+            </div>
+            <div class="num">
+              {{ totalNum }}
+            </div>
+          </div>
         </div>
-        <div class="v-num">
-          {{ mNum }}
-        </div>
+        <BaseECharts height="400px" :options="timeOption" />
       </div>
     </div>
   </div>
@@ -105,39 +216,49 @@ onMounted(() => {
 
 <style scoped lang='less'>
 .my-home {
-  height: 600px;
-  width: 100%;
-  // padding: 0 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-  width: 80%;
+.home-title {
+  margin: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.charts {
+  display: flex;
+  justify-content: space-between;
 }
 
-.top-box {
-  width: 80%;
+.charts-card {
+  width: 50%;
 }
 
-.c-box {
-  height: 100px;
-  width: 30%;
-  // background-color: #fd8f00;
+.card-title {
+  margin: 10px;
+  padding: 0 10px;
+  height: 90px;
+  background-color: #ffffff78;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
 }
 
-.separate {
-  height: 2px;
-  width: 80%;
-  background-color: #fff;
-  margin: 30px;
+.dark .card-title {
+  background-color: #ffffff33;
 }
 
-.bot-box {
-  height: 150px;
-  width: 80%;
-  // background-color: #fff;
-
+.title-left {
+  font-size: 50px;
+  margin-right: 10px;
+  color: @main;
 }
-.left-title {
-  text-align: left;
+
+.title-right {
+  line-height: 36px;
+
+  .title {
+    font-weight: bold;
+  }
 }
 </style>

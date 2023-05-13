@@ -44,7 +44,7 @@ errorTips:
   watchCourse: Please Check Out More Courses After Login
   watchVR: Please Check Out More VR After Login
 myHomeText:
-  title: Did you study tody
+  title: Did you study tody (ง •̀_•́)ง
   point: Point
   totalTime: Total Learning Duration
   totalNum: Number of Videos Watched
@@ -52,7 +52,8 @@ myHomeText:
 historyTable:
   course: Course
   section: Section
-  time: Learning Time / min
+  time: Viewing Time / min
+  num: Number of Views
   propC: csen
   propS: scen
 vr:

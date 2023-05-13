@@ -44,7 +44,7 @@ errorTips:
   watchCourse: 请在登录后查看更多课程
   watchVR: 请在登录后查看更多VR展示
 myHomeText:
-  title: 今天学习了吗
+  title: 今天学习了吗 (ง •̀_•́)ง
   point: 积分
   totalTime: 学习总时长
   totalNum: 观看视频总次数
@@ -53,6 +53,7 @@ historyTable:
   course: 课程
   section: 小节
   time: 学习时长/分钟
+  num: 观看次数
   propC: cscn
   propS: sccn
 vr:
