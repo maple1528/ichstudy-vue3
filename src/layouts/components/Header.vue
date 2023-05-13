@@ -106,18 +106,18 @@ onUnmounted(() => {
         <div i="tabler-sun-high dark:tabler-moon" />
       </div>
       <div v-if="userStore.token" class="group f-c-c relative">
-        <div class="w-8 h-8 b-2 mx-2 b-black rounded-full" @click="routerPush('/my')">
-          <img class="object-contain" src="@/assets/avatar.svg" alt="avatar">
+        <div class="mx-2 cursor-pointer" @click="routerPush('/my')">
+          <div i-carbon-face-cool text-6 />
         </div>
-        <div class="w-20 mx-2 text-left truncate" @click="routerPush('/my')">
+        <div class="w-20 mx-2 text-left truncate cursor-pointer" @click="routerPush('/my')">
           {{ userStore.username }}
         </div>
-        <ul class="absolute left-0 top-12 p-3 rounded-3 text-center bg-white shadow divide-y-2 divide-white invisible opacity-0 transition-all delay-100 group-hover:(visible opacity-100)">
-          <span class="before:(content-empty absolute w-0 h-0 b-16 b-t-0 b-transparent b-b-white -translate-x-4 -translate-y-6)" />
-          <li class="p-2 px-3 rounded-2 hover:(bg-gray-2) transition" @click="routerPush('/my')">
+        <ul class="absolute left-0 top-12 p-3 rounded-3 text-center bg-white dark:bg-neutral-500 shadow divide-y-2 divide-white dark:divide-neutral-500 invisible opacity-0 transition-all delay-100 group-hover:(visible opacity-100)">
+          <span class="before:(content-empty absolute w-0 h-0 b-16 b-t-0 b-transparent b-b-white dark:b-b-neutral-500 -translate-x-4 -translate-y-6)" />
+          <li class="p-2 px-3 rounded-2 hover:bg-gray-2 dark:hover:bg-neutral-4 transition cursor-pointer" @click="routerPush('/my')">
             {{ $t('navList.my') }}
           </li>
-          <li class="p-2 px-3 rounded-2 hover:(bg-gray-2) transition" @click="logout">
+          <li class="p-2 px-3 rounded-2 hover:bg-gray-2 dark:hover:bg-neutral-4 transition cursor-pointer" @click="logout">
             {{ $t('navList.logout') }}
           </li>
         </ul>

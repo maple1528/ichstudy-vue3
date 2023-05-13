@@ -19,7 +19,7 @@ const logout = () => {
     <div class="user-box">
       <div class="user-left">
         <div class="user-top">
-          <img src="@/assets/avatar.svg">
+          <div i-carbon-face-cool text-26 />
           <h2>{{ userStore.username }}</h2>
         </div>
         <ElMenu
@@ -138,14 +138,6 @@ const logout = () => {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  img {
-    width: 80px;
-    height: 80px;
-    border: 5px solid #000000;
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
 
   h2 {
     text-align: center;
