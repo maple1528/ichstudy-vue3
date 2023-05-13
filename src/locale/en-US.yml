@@ -2,6 +2,7 @@ navList:
   home: Home
   course: Course
   vr: VR
+  tourist: Tourist
   about: About
   login: Sign In
   reg: Sign Up
@@ -43,6 +44,7 @@ errorTips:
   registeredPhone: This Phone has Already be Registered
   watchCourse: Please Check Out More Courses After Login
   watchVR: Please Check Out More VR After Login
+  watchTourist: Please Check Out More Details After Login
 myHomeText:
   title: Did you study tody (ง •̀_•́)ง
   point: Point
@@ -60,3 +62,16 @@ vr:
   browser: Browser
 course:
   list: Sections
+tourist:
+  detail: View Details
+  theme: Activity Theme
+  time: Activity Time
+  location: Activity Location
+  deadline: Registration Time
+  content: Activity Content
+  aim: Activity Target
+  note: Activity Note
+  info: Detail
+  visitDate: Visit Date
+  visitTime: Visit Time
+  register: Register Now

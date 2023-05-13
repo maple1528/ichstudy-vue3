@@ -24,6 +24,10 @@ const navList: Array<INavList> = [
     router: '/vr',
     text: 'navList.vr',
   },
+  {
+    router: '/tourist',
+    text: 'navList.tourist',
+  },
   // {
   //   router: '/about',
   //   text: 'navList.about'

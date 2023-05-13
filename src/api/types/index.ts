@@ -24,3 +24,13 @@ export interface ISMSVerify {
   username: string
   code: string
 }
+
+export interface ITourist {
+  action: string
+  uindex: string
+  tsindex: string
+  tindex: string
+  mates: string
+  phone_number: string
+  remarks: string
+}

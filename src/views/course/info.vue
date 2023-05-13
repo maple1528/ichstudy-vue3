@@ -99,7 +99,7 @@ onMounted(() => {
 <template>
   <div class="content f-c-c">
     <div class="left">
-      <div class="flex items-center mb-5">
+      <div class="f-c-s mb-5">
         <button class="f-c-c p-1 pl-2 pr-3 rounded-99 back-btn" @click="back()">
           <div i-tabler-chevron-left />
           {{ $t('context.back') }}

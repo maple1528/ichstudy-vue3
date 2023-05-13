@@ -55,6 +55,17 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/vr/vr.vue'),
       },
       {
+        path: '/tourist',
+        name: 'tourist',
+        component: () => import('@/views/tourist/tourist.vue'),
+      },
+      {
+        path: '/tourist/:id',
+        name: 'touristInfo',
+        component: () => import('@/views/tourist/info.vue'),
+        props: true,
+      },
+      {
         path: '/about',
         name: 'about',
         component: () => import('@/views/about/about.vue'),

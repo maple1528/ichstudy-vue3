@@ -57,7 +57,7 @@ onMounted(async () => {
       <div class="right">
         <h2>{{ currentLocale === 'zh-CN' ? item.vrcnname : item.vrenname }}</h2>
         <p>{{ currentLocale === 'zh-CN' ? item.vrcninfo : item.vreninfo }}</p>
-        <button class="btn" @click="openVR(item.vrpath)">
+        <button class="btn mt-5 w-60%" @click="openVR(item.vrpath)">
           {{ $t('vr.browser') }}
         </button>
       </div>
@@ -99,14 +99,6 @@ onMounted(async () => {
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
-  }
-
-  .btn {
-    width: 60%;
-    padding: 10px 5px;
-    margin-top: 20px;
-    background-color: @main;
-    border-radius: 99px;
   }
 }
 </style>

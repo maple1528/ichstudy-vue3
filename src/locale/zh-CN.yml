@@ -2,6 +2,7 @@ navList:
   home: 首页
   course: 研学课程
   vr: VR
+  tourist: 研学旅行
   about: 关于我们
   login: 登录
   reg: 注册
@@ -43,6 +44,7 @@ errorTips:
   registeredPhone: 手机号已被注册
   watchCourse: 请在登录后查看更多课程
   watchVR: 请在登录后查看更多VR展示
+  watchTourist: 请在登录后查看详情
 myHomeText:
   title: 今天学习了吗 (ง •̀_•́)ง
   point: 积分
@@ -60,3 +62,16 @@ vr:
   browser: 浏览
 course:
   list: 章节选择
+tourist:
+  detail: 查看详情
+  theme: 活动主题
+  time: 活动时间
+  location: 活动地点
+  deadline: 报名时间
+  content: 活动内容
+  aim: 活动目标
+  note: 注意事项
+  info: 详情
+  visitDate: 参观日期
+  visitTime: 参观时间
+  register: 立即报名

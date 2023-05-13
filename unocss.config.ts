@@ -24,8 +24,9 @@ export default defineConfig({
       'flex-col': 'flex flex-col',
       'f-c-c': 'flex items-center justify-center',
       'f-c-b': 'flex items-center justify-between',
+      'f-c-s': 'flex items-center justify-start',
       'icon-btn': 'inline-block cursor-pointer select-none transition duration-200 ease-in-out hover:opacity-100 hover:text-main',
-      // 'btn': 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50',
+      'btn': 'px-4 py-3 rounded-99 inline-block bg-main cursor-pointer hover:bg-amber-400 transition-300 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50',
     },
   ],
   theme: {
