@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import Background from '@/components/Background.vue'
 import router from '@/router'
 
 const userStore = useUserStore()
@@ -11,11 +12,7 @@ const logout = () => {
 
 <template>
   <div class="content">
-    <div class="color" />
-    <div class="color" />
-    <div class="color" />
-    <div class="color" />
-
+    <Background />
     <div class="user-box">
       <div class="user-left">
         <div class="user-top">
@@ -49,13 +46,6 @@ const logout = () => {
 </template>
 
 <style scoped lang='less'>
-.content {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
 .el-menu {
   border: none;
   width: 200px;
@@ -72,43 +62,6 @@ const logout = () => {
   }
 }
 
-.color {
-  position: absolute;
-  filter: blur(150px);
-  z-index: -1;
-}
-
-.color:nth-child(1) {
-  bottom: -100px;
-  right: -100px;
-  height: 600px;
-  width: 800px;
-  background-color: #ffebaae0;
-}
-.color:nth-child(2) {
-  top: 200px;
-  right: -100px;
-  height: 300px;
-  width: 500px;
-  background-color: #e9b169e0;
-}
-.color:nth-child(3) {
-  top: -100px;
-  left: -100px;
-  height: calc(100vh - 100px);
-  width: 1000px;
-  background-color: #f8db9be0;
-}
-.color:nth-child(4) {
-  left: 500px;
-  bottom: -100px;
-  height: 400px;
-  width: 500px;
-  background-color: #e6cab2e0;
-}
-.dark .color {
-  background-color: transparent;
-}
 .user-box {
   height: 80%;
   width: 80%;
