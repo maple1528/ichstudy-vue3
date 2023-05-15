@@ -1,6 +1,8 @@
-# Vue 3 + TypeScript + Vite
+# ICH Study 非遗研学
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+本项目是以留学生为主要服务群体，以民间工艺等中国传统文化为教学内容的研究平台
+
+使用Vue3, Vite, Typescript, Pinia, Unocss, Element-plus, pnpm等技术栈实现
 
 ## Recommended IDE Setup
 
@@ -14,3 +16,51 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+
+
+## 项目配置
+### 目录结构
+```tree
+|-- .vscode                     // vscode插件、设置
+|   |-- extensions.json         // 插件
+|   |-- setting.json            // 设置
+|-- public
+|-- src
+|   |-- api                     // 网络请求
+|   |-- |-- types.d.ts
+|   |-- |-- request.ts
+|   |-- assets                  // 图片，字体等静态资源
+|   |-- components              // 全局组件
+|   |-- composables             // 组合式函数
+|   |-- hooks                   // 组合式的函数hooks(内部状态)
+|   |-- layouts                 // 布局组件
+|   |-- locale                  // 多语言处理
+|   |-- |-- index.ts
+|   |-- |-- en-US.yml           // 英文翻译
+|   |-- |-- zh-CN.yml           // 中文翻译
+|   |-- router                  // vue-router路由
+|   |-- stores                  // pinia状态管理
+|   |-- styles                  // 全局样式
+|   |-- |-- element.less
+|   |-- |-- index.less
+|   |-- |-- variables.less
+|   |-- typings                 // TS类型声明
+|   |   |-- auto-import.d.ts
+|   |-- utils                   // 工具函数
+|   |-- views                   // 页面
+|   |-- App.vue                 // vue文件入口
+|   |-- main.ts                 // 项目入口文件
+|   |-- vite-env.d.ts           // vue相关类型
+|-- .editorconfig               // 统一编辑器配置
+|-- .env                        // 通用环境配置
+|-- .eslintrc.json              // eslint配置文件
+|-- .gitignore                  // 配置git记录时哪些文件忽略
+|-- index.html
+|-- package.json
+|-- pnpm-lock.yaml
+|-- README.md
+|-- tsconfig.json               // TS配置
+|-- tsconfig.node.json
+|-- unocss.config.ts            // unocss配置
+|-- vite.config.ts              // vite配置
+```

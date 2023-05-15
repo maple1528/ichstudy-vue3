@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
           // './src/composables',
           './src/hook',
         ],
-        dts: './auto-imports.d.ts',
+        dts: './src/types/auto-imports.d.ts',
         // eslintrc: {
         //   enabled: false, // 自动生成全局声明文件, 不需要eslint检查(在.eslintrc-auto-import.json生成成功之后就可以改为false, 当你更新了导入配置后,将其改为true即可重新生成一次)
         //   filepath: './.eslintrc-auto-import.json',
