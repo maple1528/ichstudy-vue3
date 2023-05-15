@@ -1,7 +1,9 @@
 <script setup lang='ts'>
 import { getCourseV, getSectionV } from '@/api/visitor'
+import { uploadMy } from '@/api/course'
 import router from '@/router'
 import { getFileUrl } from '@/utils/common'
+import type { IUpload } from '@/api/types'
 
 // import "vue3-video-play/dist/style.css";
 // import { videoPlay } from "vue-video-play";
@@ -20,11 +22,10 @@ interface IInfo {
 const { currentLocale } = useLocale()
 const route = useRoute()
 const cid = route.params.id as string
-// const sectionList = reactive({list: [] as IInfo[]})
-const sectionList = ref([])
-const sectionTitleList = reactive({ list: [] as IInfo[] })
+const sectionList: Ref<Array<IInfo>> = ref([])
 const currentIndex = ref(0)
 const currentUrl = ref('')
+const currentSubUrl = ref('')
 const cnTitle = ref('')
 const enTitle = ref('')
 const cnInfo = ref('')
@@ -50,19 +51,14 @@ const getSectionList = async () => {
   try {
     const { data } = await getSectionV(cid)
     sectionList.value = data.endata.data
-    const info = sectionList.value[currentIndex.value] as IInfo
+    const info = sectionList.value[currentIndex.value]
     currentUrl.value = getFileUrl('video', info.videopath)
-
-    sectionList.value.forEach((item) => {
-      const i = item as IInfo
-      sectionTitleList.list.push(i)
-    })
+    currentSubUrl.value = getFileUrl('vtt', info.subtitlespath)
   } catch (err) {
   }
 }
 
 const getCourseInfo = async () => {
-  await getSectionList()
   try {
     const { data } = await getCourseV()
     const arr = data.endata.data
@@ -82,7 +78,7 @@ const getCourseInfo = async () => {
 
 const changeVideo = (index: number) => {
   currentIndex.value = index
-  const info = sectionList.value[index] as IInfo
+  const info = sectionList.value[index]
   currentUrl.value = getFileUrl('video', info.videopath)
 }
 
@@ -90,9 +86,56 @@ const back = () => {
   router.go(-1)
 }
 
-onMounted(() => {
-  // getSectionList()
-  getCourseInfo()
+const sTime: Ref<number> = ref(0)
+const eTime: Ref<number> = ref(0)
+const deltaTime = ref(0)
+const { token } = useUserStore()
+
+const upload = async () => {
+  if (!token) {
+    return
+  }
+  if (!sTime.value) {
+    return
+  }
+  if (!eTime.value) {
+    eTime.value = new Date().getTime()
+  }
+  deltaTime.value = Math.ceil((eTime.value - sTime.value) / 60000)
+
+  const params: IUpload = {
+    action: '',
+    cindex: cid,
+    sindex: sectionList.value[currentIndex.value].sindex,
+    ctime: deltaTime.value,
+  }
+  await uploadMy(params)
+
+  sTime.value = eTime.value = deltaTime.value = 0
+}
+
+const startPlay = () => {
+  if (!sTime.value) {
+    sTime.value = new Date().getTime()
+  }
+}
+
+const endPlay = () => {
+  if (!eTime.value) {
+    eTime.value = new Date().getTime()
+  }
+  upload()
+}
+
+onMounted(async () => {
+  await getSectionList()
+  await getCourseInfo()
+})
+
+// TODO: 此处仅有路由检测，没有处理直接关闭页面时上传数据
+onBeforeRouteLeave(async (to, from, next) => {
+  await upload()
+  next()
 })
 </script>
 
@@ -111,9 +154,11 @@ onMounted(() => {
       <video
         controls
         :src="currentUrl"
+        @play="startPlay"
+        @ended="endPlay"
       >
         <source :src="currentUrl" type="video/mp4">
-        <!-- <track :src="currentSubUrl" kind="subtitles" default> -->
+        <track :src="currentSubUrl" kind="subtitles" default>
       </video>
       <p class="info">
         {{ info }}
@@ -125,7 +170,7 @@ onMounted(() => {
       </div>
       <ul>
         <li
-          v-for="(item, i) in sectionTitleList.list"
+          v-for="(item, i) in sectionList"
           :key="i"
           :class="{ active: currentIndex === i }"
           @click="changeVideo(i)"

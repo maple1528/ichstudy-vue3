@@ -34,3 +34,10 @@ export interface ITourist {
   phone_number: string
   remarks: string
 }
+
+export interface IUpload {
+  action: string
+  cindex: string
+  sindex: string
+  ctime: number
+}
