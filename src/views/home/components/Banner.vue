@@ -68,7 +68,9 @@ const startBtn = () => {
 }
 
 .content.mask {
-  color: @text-dark;
+  div {
+    color: @text-dark;
+  }
 
   mask-image: url('@/assets/ink-mask.png');
   mask-repeat: no-repeat;
@@ -76,5 +78,9 @@ const startBtn = () => {
   -webkit-mask-image: url('@/assets/ink-mask.png');
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center right;
+}
+
+.dark .content.mask div {
+  color: @text-light;
 }
 </style>
