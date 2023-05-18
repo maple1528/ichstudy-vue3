@@ -23,9 +23,9 @@ const startBtn = () => {
         {{ $t('context.start') }}
       </button>
       <div class="ink">
-        <!-- <img src="src/assets/ink.png" alt=""> -->
-        <img v-show="!isDark" src="src/assets/ink-black.png" alt="">
-        <img v-show="isDark" src="src/assets/ink-white.png" alt="">
+        <!-- <img src="/src/assets/ink.png" alt=""> -->
+        <img v-show="!isDark" src="/src/assets/ink-black.png" alt="">
+        <img v-show="isDark" src="/src/assets/ink-white.png" alt="">
       </div>
     </div>
     <div class="content mask">

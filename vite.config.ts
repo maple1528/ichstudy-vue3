@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
+import Compression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -65,6 +66,9 @@ export default defineConfig(({ mode }) => {
         resolvers: [
           ElementPlusResolver(),
         ],
+      }),
+      Compression({
+        threshold: 10240, // 对大于 10kb 的文件进行压缩
       }),
     ],
     resolve: {
