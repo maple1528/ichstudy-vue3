@@ -9,6 +9,8 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
 import Compression from 'vite-plugin-compression'
+// 引入这个插件解决按需引入后ElMessage不显示的问题，但此处报了与VueMacros类似的错误
+import ElementPlus from 'unplugin-element-plus/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -32,6 +34,7 @@ export default defineConfig(({ mode }) => {
         fullInstall: true,
         include: [path.resolve(__dirname, 'src/locale/*.yml')],
       }),
+      ElementPlus({}),
       // https://unocss.dev
       // see unocss.config.ts for config
       UnoCSS(),
