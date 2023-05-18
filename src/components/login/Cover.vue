@@ -5,7 +5,7 @@
         <img src="@/assets/logo.png" alt="logo">
       </div>
       <div class="right">
-        <el-tabs v-model="type" tab-position="top" stretch>
+        <el-tabs :model-value="type" tab-position="top" stretch>
           <el-tab-pane :label="$t('navList.login')" :name="1">
             <login-from @close="toClose"></login-from>
           </el-tab-pane>
