@@ -5,6 +5,8 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 // 此处VueMacros报错，参见https://github.com/sxzz/unplugin-vue-macros/issues/257
 import VueMacros from 'unplugin-vue-macros/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
 
 // https://vitejs.dev/config/
@@ -47,11 +49,22 @@ export default defineConfig(({ mode }) => {
           './src/hook',
         ],
         dts: './src/types/auto-imports.d.ts',
+        resolvers: [
+          ElementPlusResolver(),
+        ],
         // eslintrc: {
         //   enabled: false, // 自动生成全局声明文件, 不需要eslint检查(在.eslintrc-auto-import.json生成成功之后就可以改为false, 当你更新了导入配置后,将其改为true即可重新生成一次)
         //   filepath: './.eslintrc-auto-import.json',
         //   globalsPropValue: true,
         // },
+      }),
+      Components({
+        dirs: ['src/components'],
+        dts: 'src/types/components.d.ts',
+        // dts: true,
+        resolvers: [
+          ElementPlusResolver(),
+        ],
       }),
     ],
     resolve: {
@@ -74,6 +87,15 @@ export default defineConfig(({ mode }) => {
             hack: `true; @import (reference) "${path.resolve('src/styles/variables.less')}";`,
           },
           javascriptEnabled: true,
+        },
+      },
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'element-plus': ['element-plus'],
+          },
         },
       },
     },
