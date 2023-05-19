@@ -34,13 +34,13 @@ const touristList: Ref<Array<ITouristInfo>> = ref([])
 const { currentLocale } = useLocale()
 
 const { t } = useI18n()
-const { token } = useUserStore()
 
 const tip = computed(() => {
   return t('errorTips.watchTourist')
 })
 
 const toDetail = (tindex: string) => {
+  const { token } = useUserStore()
   if (!token) {
     ElMessage.error(tip.value)
     return

@@ -61,7 +61,6 @@ const changeIndex = (newIndex: number) => {
 }
 
 const { t } = useI18n()
-const { token } = useUserStore()
 const { courseNum, setNumber } = useVisitorStore()
 
 const tip = computed(() => {
@@ -69,6 +68,7 @@ const tip = computed(() => {
 })
 
 const toVideo = (cindex: string) => {
+  const { token } = useUserStore()
   const routerUrl = `/course/${cindex}`
 
   if (token) {

@@ -21,13 +21,13 @@ const imgUrl = getFileUrl('img', props.info.imgpath)
 const routerUrl = `/course/${props.info.cindex}`
 
 const { t } = useI18n()
-const { token } = useUserStore()
 const { courseNum, setNumber } = useVisitorStore()
 
 const tip = computed(() => {
   return t('errorTips.watchCourse')
 })
 const toVideo = () => {
+  const { token } = useUserStore()
   if (token) {
     routerPush(routerUrl)
   } else if (courseNum < 5) {

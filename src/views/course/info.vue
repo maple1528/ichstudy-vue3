@@ -89,9 +89,9 @@ const back = () => {
 const sTime: Ref<number> = ref(0)
 const eTime: Ref<number> = ref(0)
 const deltaTime = ref(0)
-const { token } = useUserStore()
 
 const upload = async () => {
+  const { token } = useUserStore()
   if (!token) {
     return
   }

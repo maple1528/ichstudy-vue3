@@ -20,7 +20,6 @@ const vrList: Ref<Array<IInfo>> = ref([])
 const { currentLocale } = useLocale()
 
 const { t } = useI18n()
-const { token } = useUserStore()
 const { vrNum, setNumber } = useVisitorStore()
 
 const tip = computed(() => {
@@ -28,6 +27,7 @@ const tip = computed(() => {
 })
 
 const openVR = (url: string) => {
+  const { token } = useUserStore()
   if (token) {
     window.open(url, '_blank')
   } else if (vrNum < 5) {
