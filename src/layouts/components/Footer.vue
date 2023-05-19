@@ -6,7 +6,7 @@ defineOptions({ name: 'Footer' })
   <div class="f-c-c h-60 text-text-dark bg-main-deep dark:bg-main-deep-dark">
     <div class="mr-12">
       <h2>{{ $t('footer.contact') }}</h2>
-      <p>{{ $t('footer.email') }}： zust_inter@foxmail.com</p>
+      <p>{{ $t('footer.email') }}： 3517004704@qq.com</p>
       <span>ICP备案： 浙ICP备18023314号-3</span>
     </div>
     <div class="group relative flex flex-row items-center ml-12 cursor-pointer">
